@@ -1,0 +1,41 @@
+name: Daily Activity Sync (LeetCode & GitHub)
+
+on:
+  schedule:
+    # Runs daily at 00:00 UTC (07:00 AM ICT)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync-activity:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch latest LeetCode and GitHub metrics
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/update-activity.js
+
+      - name: Commit and push updates
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/activity.json data/activity.js
+          if git diff --staged --quiet; then
+            echo "No activity updates found. Data is already up to date."
+          else
+            git commit -m "chore(data): auto-update LeetCode & GitHub activity [skip ci]"
+            git push
+          fi

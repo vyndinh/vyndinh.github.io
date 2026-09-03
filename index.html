@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vy Dinh — Software Engineer</title>
+  <meta name="description"
+    content="Portfolio of Vy Dinh, a Software Engineer with 8+ years of experience building high-throughput distributed systems, event pipelines, and AI engineering.">
+  <meta name="author" content="Vy Dinh">
+  <meta property="og:title" content="Vy Dinh — Software Engineer">
+  <meta property="og:description"
+    content="8+ years building and operating high-throughput distributed systems, event streams, and real-time platforms across high-scale infrastructure.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23FEF08A'/><text x='50' y='65' font-size='48' font-weight='900' font-family='sans-serif' text-anchor='middle' fill='%2318181B'>VD</text></svg>">
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Vy Dinh",
+    "jobTitle": "Software Engineer",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ho Chi Minh City",
+      "addressCountry": "Vietnam"
+    },
+    "email": "dnthuyvy@gmail.com",
+    "telephone": "+84902464075",
+    "url": "https://github.com/vyndinh",
+    "sameAs": [
+      "https://github.com/vyndinh",
+      "https://linkedin.com/in/vydinhtn"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <div class="site-wrapper">
+
+    <!-- ====================================================================
+         HEADER SECTION
+         ==================================================================== -->
+    <header class="header-card">
+      <div class="header-top">
+        <div class="header-profile">
+          <div class="avatar-wrapper">
+            <div class="avatar" title="Vy Dinh — Software Engineer">
+              <img src="avatar.jpg" alt="Vy Dinh — Software Engineer (Neobrutalism Avatar)" width="68" height="68">
+            </div>
+            <span class="status-indicator-dot" title="Available for opportunities"></span>
+          </div>
+          <div class="title-group">
+            <h1 class="site-title">
+              Vy Dinh
+              <span class="verified-badge" title="Software Engineer">✓</span>
+            </h1>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="themeToggle" class="neo-btn neo-btn-icon" aria-label="Toggle Dark Mode"
+            title="Toggle Light/Dark Theme">
+            <span id="themeIcon">🌙</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="bio-text">
+        Software Engineer with <strong>8+ years of experience</strong> building and operating high-throughput,
+        multi-tenant distributed systems, including <strong>5 years at Axon Enterprise</strong>.
+      </p>
+
+      <!-- Pill Nav / Quick Actions -->
+      <nav class="header-pill-nav" aria-label="Primary navigation and contacts">
+        <a href="https://substack.com/@vyndyn" target="_blank" rel="noopener noreferrer" class="neo-btn btn-coral"
+          title="Substack Newsletter">
+          <span>📬</span>
+          <span>Substack</span>
+        </a>
+        <a href="https://github.com/vyndinh" target="_blank" rel="noopener noreferrer" class="neo-btn btn-yellow"
+          title="GitHub Profile">
+          <span>💻</span>
+          <span>GitHub</span>
+        </a>
+        <a href="https://linkedin.com/in/vydinhtn" target="_blank" rel="noopener noreferrer" class="neo-btn"
+          title="LinkedIn Profile">
+          <span>↗</span>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://t.me/dy_engineering_bot" target="_blank" rel="noopener noreferrer" class="neo-btn"
+          title="Daily Engineering News Telegram Bot (@dy_engineering_bot)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 1px;">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          <span>telegram</span>
+        </a>
+        <button id="copyEmailBtn" class="neo-btn" title="Copy Email to Clipboard">
+          <span>✉️</span>
+          <span>Copy Email</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- ====================================================================
+         HERO STATUS CARD (Matches "90% chance of reset" card)
+         ==================================================================== -->
+    <section class="neo-card hero-card" aria-label="Engineering Focus & Status">
+      <div class="hero-top-meta">
+        <span class="mono-tag">👀 CURRENT FOCUS</span>
+      </div>
+
+      <div class="hero-headline-group">
+        <h2 class="hero-headline">Software Engineer</h2>
+        <div class="hero-subdate">HO CHI MINH CITY, VIETNAM • 8+ YEARS IN PRODUCTION</div>
+      </div>
+
+      <div class="hero-inner-box">
+        Passionate about high-throughput distributed systems, stream processing, and reliable backend microservices. I
+        take pride in seeing features through the entire lifecycle, from technical system design and implementation to
+        production deployments and on-call operations.
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TECHNICAL SKILLS MATRIX (Interactive Spotlight)
+         ==================================================================== -->
+    <section class="neo-card skills-card" id="skills" aria-label="Technical Skills">
+      <div class="section-header">
+        <h2 class="section-title">Core Competencies</h2>
+        <span class="mono-tag" style="font-size: 0.72rem;">👉 Click any skill to filter career highlights</span>
+      </div>
+
+      <div class="skills-category">
+        <span class="skills-category-title">Back-End & Distributed Systems</span>
+        <div class="tags-wrap">
+          <button class="skill-pill" data-skill="Golang">Golang</button>
+          <button class="skill-pill" data-skill="Java">Java</button>
+          <button class="skill-pill" data-skill="C++">C++</button>
+          <button class="skill-pill" data-skill="Kafka">Kafka</button>
+          <button class="skill-pill" data-skill="Flink">Flink</button>
+          <button class="skill-pill" data-skill="Elasticsearch">Elasticsearch</button>
+          <button class="skill-pill" data-skill="SQL">SQL / Spatial SQL</button>
+          <button class="skill-pill" data-skill="ActiveMQ">ActiveMQ</button>
+          <button class="skill-pill" data-skill="Blob Storage">Blob Storage</button>
+          <button class="skill-pill" data-skill="REST APIs">REST APIs & OpenAPI</button>
+          <button class="skill-pill" data-skill="Vert.x">Vert.x</button>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <span class="skills-category-title">Cloud, DevOps & Infrastructure</span>
+        <div class="tags-wrap">
+          <button class="skill-pill" data-skill="Kubernetes">Kubernetes</button>
+          <button class="skill-pill" data-skill="Docker">Docker</button>
+          <button class="skill-pill" data-skill="GitOps">GitOps</button>
+          <button class="skill-pill" data-skill="Helm">Helm</button>
+          <button class="skill-pill" data-skill="ArgoCD">ArgoCD</button>
+          <button class="skill-pill" data-skill="Terraform">Terraform</button>
+          <button class="skill-pill" data-skill="AWS">AWS (EC2, S3, RDS, Kinesis, Cognito)</button>
+          <button class="skill-pill" data-skill="OpenStack">OpenStack</button>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <span class="skills-category-title">Monitoring & Site Reliability</span>
+        <div class="tags-wrap">
+          <button class="skill-pill" data-skill="Grafana">Grafana</button>
+          <button class="skill-pill" data-skill="Prometheus">Prometheus</button>
+          <button class="skill-pill" data-skill="OpenTelemetry">OpenTelemetry</button>
+          <button class="skill-pill" data-skill="Splunk">Splunk</button>
+          <button class="skill-pill" data-skill="SLO">SLOs & Incident Triage</button>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <span class="skills-category-title">AI / ML Engineering</span>
+        <div class="tags-wrap">
+          <button class="skill-pill" data-skill="RAG">RAG Pipelines</button>
+          <button class="skill-pill" data-skill="Embeddings">Embeddings (nomic-embed-text)</button>
+          <button class="skill-pill" data-skill="Vector DB">Qdrant Vector DB</button>
+          <button class="skill-pill" data-skill="LLM">LLM Integration (Qwen2.5-Coder)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         WORK EXPERIENCE (Concise company names & years)
+         ==================================================================== -->
+    <section class="experience-list" id="experience" aria-label="Work Experience">
+      <div class="section-header">
+        <h2 class="section-title">Work Experience</h2>
+        <span class="mono-tag">8+ YEARS IN PRODUCTION</span>
+      </div>
+
+      <!-- Axon Enterprise -->
+      <article class="neo-card exp-card exp-card-compact" data-company="Axon Enterprise"
+        data-keywords="Golang Java Kafka Flink Elasticsearch Kubernetes Docker GitOps Helm ArgoCD ActiveMQ SQL Vert.x">
+        <div class="exp-header" style="border-bottom: none; padding-bottom: 0;">
+          <div class="exp-role-group">
+            <h3 class="exp-role">Software Engineer II</h3>
+            <div class="exp-company">
+              <span>Axon Enterprise</span>
+              <span class="promo-badge">Promoted from SE I</span>
+            </div>
+          </div>
+          <span class="exp-date-badge">Mar 2021 – 2026 (5 yrs)</span>
+        </div>
+        <div class="tech-stack-pills" style="margin-top: 0.75rem;">
+          <span class="mini-tech-tag">Golang</span>
+          <span class="mini-tech-tag">Java</span>
+          <span class="mini-tech-tag">Kafka</span>
+          <span class="mini-tech-tag">Flink</span>
+          <span class="mini-tech-tag">Kubernetes</span>
+          <span class="mini-tech-tag">Elasticsearch</span>
+          <span class="mini-tech-tag">ActiveMQ</span>
+          <span class="mini-tech-tag">ArgoCD</span>
+          <span class="mini-tech-tag">Vert.x</span>
+        </div>
+      </article>
+
+      <!-- Pascalia Asia -->
+      <article class="neo-card exp-card exp-card-compact" data-company="Pascalia Asia"
+        data-keywords="Java Spring Boot AWS Kinesis SQL Docker">
+        <div class="exp-header" style="border-bottom: none; padding-bottom: 0;">
+          <div class="exp-role-group">
+            <h3 class="exp-role">Software Engineer</h3>
+            <div class="exp-company">
+              <span>Pascalia Asia</span>
+            </div>
+          </div>
+          <span class="exp-date-badge">Feb 2020 – Feb 2021 (1 yr)</span>
+        </div>
+        <div class="tech-stack-pills" style="margin-top: 0.75rem;">
+          <span class="mini-tech-tag">Java</span>
+          <span class="mini-tech-tag">Spring Boot</span>
+          <span class="mini-tech-tag">AWS</span>
+          <span class="mini-tech-tag">SQL</span>
+        </div>
+      </article>
+
+      <!-- DEK Technologies -->
+      <article class="neo-card exp-card exp-card-compact" data-company="DEK Technologies"
+        data-keywords="C++ Java OpenStack Jenkins">
+        <div class="exp-header" style="border-bottom: none; padding-bottom: 0;">
+          <div class="exp-role-group">
+            <h3 class="exp-role">Software Engineer</h3>
+            <div class="exp-company">
+              <span>DEK Technologies (acquired by Endava)</span>
+            </div>
+          </div>
+          <span class="exp-date-badge">Dec 2017 – Jan 2020 (2 yrs 2 mos)</span>
+        </div>
+        <div class="tech-stack-pills" style="margin-top: 0.75rem;">
+          <span class="mini-tech-tag">C++11</span>
+          <span class="mini-tech-tag">Java</span>
+          <span class="mini-tech-tag">OpenStack</span>
+          <span class="mini-tech-tag">Jenkins</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================================
+         FEATURED PROJECTS & MINI-TERMINAL
+         ==================================================================== -->
+    <section class="neo-card" style="padding: 1.75rem 2rem; display: flex; flex-direction: column; gap: 1.5rem;"
+      id="projects" aria-label="Projects and Interactive Playground">
+      <div class="section-header">
+        <h2 class="section-title">Open Source & AI Projects</h2>
+        <span class="mono-tag">2026 – PRESENT</span>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Vietnam Stock CLI -->
+        <div class="neo-card project-card" data-keywords="Go Golang Bubble Tea SQLite">
+          <div class="project-top">
+            <div class="project-header-row">
+              <h3 class="project-name">Vietnam Stock CLI</h3>
+              <div class="project-links">
+                <a href="https://vyndinh.github.io/soinon-stock-lab-releases/" target="_blank" rel="noopener noreferrer"
+                  class="neo-btn btn-yellow" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;">
+                  Website ↗
+                </a>
+                <a href="https://github.com/vyndinh/vnstock-cli" target="_blank" rel="noopener noreferrer"
+                  class="neo-btn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;">
+                  GitHub ↗
+                </a>
+              </div>
+            </div>
+            <p class="project-desc">
+              Real-time Vietnamese stock terminal with simulated trading and AI-powered market analysis across HOSE,
+              HNX, and UPCoM. Built with Go, Bubble Tea TUI, and SQLite.
+            </p>
+          </div>
+          <div class="tech-stack-pills">
+            <span class="mini-tech-tag">Go</span>
+            <span class="mini-tech-tag">Bubble Tea TUI</span>
+            <span class="mini-tech-tag">SQLite</span>
+            <span class="mini-tech-tag">Financial TA</span>
+          </div>
+        </div>
+
+        <!-- RAG Code Search -->
+        <div class="neo-card project-card" data-keywords="Qdrant RAG Embeddings Vector DB LLM Ollama">
+          <div class="project-top">
+            <div class="project-header-row">
+              <h3 class="project-name">RAG Code Search</h3>
+              <div class="project-links">
+                <a href="https://github.com/vyndinh/ragcodepilot" target="_blank" rel="noopener noreferrer"
+                  class="neo-btn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;">
+                  GitHub ↗
+                </a>
+              </div>
+            </div>
+            <p class="project-desc">
+              Context-aware Q&A over local repositories using Qdrant vector storage, nomic-embed-text for embeddings,
+              and qwen2.5-coder:7b for intelligent code understanding and generation.
+            </p>
+          </div>
+          <div class="tech-stack-pills">
+            <span class="mini-tech-tag">Qdrant</span>
+            <span class="mini-tech-tag">RAG</span>
+            <span class="mini-tech-tag">Ollama</span>
+            <span class="mini-tech-tag">Qwen2.5-Coder</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive CLI Terminal Simulator -->
+      <div class="terminal-card" aria-label="Interactive Terminal Emulator">
+        <div class="terminal-bar">
+          <div class="terminal-dots">
+            <span class="terminal-dot dot-red"></span>
+            <span class="terminal-dot dot-yellow"></span>
+            <span class="terminal-dot dot-green"></span>
+          </div>
+          <span class="terminal-title">vnt — vy@terminal:~ (Interactive Shell)</span>
+          <div class="terminal-quick-buttons">
+            <button class="term-btn" data-cmd="help">help</button>
+            <button class="term-btn" data-cmd="summary">summary</button>
+            <button class="term-btn" data-cmd="substack">substack</button>
+            <button class="term-btn" data-cmd="telegram">telegram</button>
+            <button class="term-btn" data-cmd="skills">skills</button>
+            <button class="term-btn" data-cmd="leetcode">leetcode</button>
+            <button class="term-btn" data-cmd="vnt quote FPT">vnt quote</button>
+            <button class="term-btn" data-cmd="clear">clear</button>
+          </div>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+          <div class="term-line info">VN Terminal v2.4 (c) Vy Dinh. Type 'help' or click quick commands above.</div>
+          <div class="term-line prompt">guest@vyndinh:~$ summary</div>
+          <div class="term-line success">Vy Dinh — Software Engineer (8+ years experience).</div>
+          <div class="term-line">Specialized in Go, Kafka, Flink, high-throughput ingestion, video pipelines, Kubernetes
+            HPA, and GitOps.</div>
+        </div>
+        <div class="terminal-input-row">
+          <span class="term-prompt-sym">guest@vyndinh:~$</span>
+          <input type="text" id="terminalInput" class="term-input"
+            placeholder="type a command (e.g. 'vnt quote FPT', 'contact', 'skills')..." autocomplete="off"
+            spellcheck="false">
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         GIT CONTRIBUTIONS (26 Weeks Activity Heatmap)
+         ==================================================================== -->
+    <section class="neo-card heatmap-card" aria-label="Git Contributions Activity">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>Git Contributions</span>
+        </h2>
+        <div class="heatmap-legend">
+          <span id="contributionTotal">840+ contributions in last 26 weeks</span>
+          <span style="margin-left: 0.5rem;">Less</span>
+          <span class="legend-box git-0" title="0 contributions"></span>
+          <span class="legend-box git-1" title="1-2 contributions"></span>
+          <span class="legend-box git-2" title="3-5 contributions"></span>
+          <span class="legend-box git-3" title="6-8 contributions"></span>
+          <span class="legend-box git-4" title="9+ contributions"></span>
+          <span>More</span>
+        </div>
+      </div>
+
+      <div class="heatmap-months">
+        <span>Mar</span>
+        <span>Apr</span>
+        <span>May</span>
+        <span>Jun</span>
+        <span>Jul</span>
+        <span>Aug</span>
+      </div>
+
+      <div class="heatmap-container">
+        <div class="heatmap-days-col">
+          <span>Mon</span>
+          <span>Wed</span>
+          <span>Fri</span>
+        </div>
+        <div class="heatmap-grid" id="heatmapGrid">
+          <!-- Populated dynamically via app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Heatmap Tooltip -->
+    <div id="heatmapTooltip" class="heatmap-tooltip"></div>
+
+    <!-- ====================================================================
+         LEETCODE SUBMISSIONS & ALGORITHMIC ACTIVITY (Past 1 Year)
+         ==================================================================== -->
+    <section class="neo-card leetcode-card" aria-label="LeetCode Algorithmic Submissions">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>LeetCode Activity</span>
+        </h2>
+        <span class="mono-tag">PAST 1 YEAR</span>
+      </div>
+
+      <!-- Metrics Overview -->
+      <div class="leetcode-metrics-row">
+        <div class="lc-badge lc-badge-total">
+          <span id="lcTotalSolved">🏆 222 Solved</span>
+        </div>
+        <div class="lc-badge lc-badge-easy">
+          <span id="lcEasySolved">87 Easy</span>
+        </div>
+        <div class="lc-badge lc-badge-medium">
+          <span id="lcMediumSolved">114 Med</span>
+        </div>
+        <div class="lc-badge lc-badge-hard">
+          <span id="lcHardSolved">21 Hard</span>
+        </div>
+        <div class="lc-badge lc-badge-streak">
+          <span id="lcStreak">🔥 54-Day Streak</span>
+        </div>
+        <div class="lc-badge" style="background-color: var(--bg-card);">
+          <span id="lcActiveDays">📅 122 Active Days</span>
+        </div>
+      </div>
+
+      <!-- Difficulty Ratio Bar -->
+      <div class="lc-ratio-bar-wrap">
+        <div class="lc-ratio-bar">
+          <div id="lcBarEasy" class="lc-bar-segment lc-bar-easy" style="width: 39.2%;" title="Easy: 87 (39.2%)"></div>
+          <div id="lcBarMedium" class="lc-bar-segment lc-bar-medium" style="width: 51.4%;" title="Medium: 114 (51.4%)"></div>
+          <div id="lcBarHard" class="lc-bar-segment lc-bar-hard" style="width: 9.4%;" title="Hard: 21 (9.4%)"></div>
+        </div>
+        <div
+          style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim);">
+          <span id="lcLabelEasy" style="color: #10B981; font-weight: 700;">Easy 87 (39%)</span>
+          <span id="lcLabelMedium" style="color: #F59E0B; font-weight: 700;">Medium 114 (51%)</span>
+          <span id="lcLabelHard" style="color: #EF4444; font-weight: 700;">Hard 21 (10%)</span>
+        </div>
+      </div>
+
+      <!-- 52-Week Submissions Heatmap -->
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; border-top: 1.5px dashed rgba(24, 24, 27, 0.15); padding-top: 0.85rem;">
+        <span id="lcSubmissionsCount" style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; color: var(--text-main);">394 submissions in the past one year</span>
+        <div class="heatmap-legend" style="margin-left: auto;">
+          <span>Less</span>
+          <span class="legend-box lc-0" title="0 submissions"></span>
+          <span class="legend-box lc-1" title="1-2 submissions"></span>
+          <span class="legend-box lc-2" title="3-5 submissions"></span>
+          <span class="legend-box lc-3" title="6-10 submissions"></span>
+          <span class="legend-box lc-4" title="11+ submissions"></span>
+          <span>More</span>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto; padding-bottom: 0.25rem;">
+        <div class="heatmap-months"
+          style="font-size: 0.7rem; min-width: 680px; padding-left: 1.8rem; margin-bottom: 4px;">
+          <span>Sep</span>
+          <span>Oct</span>
+          <span>Nov</span>
+          <span>Dec</span>
+          <span>Jan</span>
+          <span>Feb</span>
+          <span>Mar</span>
+          <span>Apr</span>
+          <span>May</span>
+          <span>Jun</span>
+          <span>Jul</span>
+          <span>Aug</span>
+        </div>
+        <div class="heatmap-container" style="min-width: 680px;">
+          <div class="heatmap-days-col" style="font-size: 0.65rem;">
+            <span>Mon</span>
+            <span>Wed</span>
+            <span>Fri</span>
+          </div>
+          <div class="lc-heatmap-grid" id="leetcodeHeatmapGrid">
+            <!-- Populated dynamically via app.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ====================================================================
+         EDUCATION & CREDENTIALS
+         ==================================================================== -->
+    <section class="neo-card education-card" aria-label="Education">
+      <div class="edu-info">
+        <span class="mono-tag">ACADEMIC BACKGROUND</span>
+        <h3 class="edu-degree">Bachelor of Science in Physics and Engineering</h3>
+        <p class="edu-dept">Department of Electronics Physics Technology and Informatics</p>
+        <p class="edu-school">University of Science, Ho Chi Minh City, Vietnam</p>
+      </div>
+      <span class="exp-date-badge">2011 – 2016</span>
+    </section>
+
+    <!-- ====================================================================
+         FOOTER & CALL TO ACTION
+         ==================================================================== -->
+    <section class="neo-card footer-cta-card" aria-label="Get in Touch">
+      <div class="mono-tag"
+        style="background-color: var(--bg-card); padding: 0.25rem 0.75rem; border-radius: 9999px; border: 1.5px solid var(--border-color);">
+        🚀 LET'S CONNECT
+      </div>
+      <h2 class="footer-cta-title">Building High-Scale Systems?</h2>
+      <p class="footer-cta-desc">
+        I bring 8+ years of hands-on experience architecting distributed event pipelines, scaling Kubernetes
+        microservices, and delivering high-reliability backend systems.
+      </p>
+
+      <div class="footer-cta-actions">
+        <a href="https://substack.com/@vyndyn" target="_blank" rel="noopener noreferrer" class="neo-btn btn-coral" title="Substack Newsletter">
+          <span>📬</span>
+          <span>Substack</span>
+        </a>
+        <a href="mailto:dnthuyvy@gmail.com" class="neo-btn" title="Send email">
+          <span>✉️</span>
+          <span>dnthuyvy@gmail.com</span>
+        </a>
+        <a href="https://linkedin.com/in/vydinhtn" target="_blank" rel="noopener noreferrer" class="neo-btn"
+          title="Connect on LinkedIn">
+          <span>💼</span>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://github.com/vyndinh" target="_blank" rel="noopener noreferrer" class="neo-btn"
+          title="View GitHub">
+          <span>💻</span>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>© 2026 Vy Dinh • Designed with modern neobrutalism • Ho Chi Minh City, Vietnam</p>
+    </footer>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-notice" role="alert">Email copied to clipboard!</div>
+
+  <!-- Dynamic Activity Data (Auto-Updated Daily via GitHub Actions) -->
+  <script src="data/activity.js"></script>
+  <!-- Main JavaScript -->
+  <script src="app.js"></script>
+</body>
+
+</html>
