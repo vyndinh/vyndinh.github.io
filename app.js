@@ -450,10 +450,10 @@ function initTerminal() {
 
       case 'education':
       case 'academic':
-        appendLine('Academic Background & Hardware Roots (2011 – 2016):', 'warning');
+        appendLine('Academic Background & Embedded Systems (2011 – 2016):', 'warning');
         appendLine('• B.S. in Physics and Engineering — University of Science, HCMC', 'success');
         appendLine('• Dept. of Electronics Physics Technology and Informatics', 'info');
-        appendLine('• Hands-on focus: Custom PCB design, embedded systems, microcontrollers (MCU), and low-level C/C++ firmware.', 'info');
+        appendLine('• Hands-on focus: End-to-end embedded systems across both hardware (custom PCB design) and software (low-level C/C++ firmware).', 'info');
         break;
 
       case 'summary':
