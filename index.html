@@ -8,18 +8,48 @@
   <meta name="description"
     content="Portfolio of Vy Dinh, a Software Engineer with 8+ years of experience building high-throughput distributed systems, event pipelines, and AI engineering.">
   <meta name="author" content="Vy Dinh">
-  <meta property="og:title" content="Vy Dinh — Software Engineer">
-  <meta property="og:description"
-    content="8+ years building and operating high-throughput distributed systems, event streams, and real-time platforms across high-scale infrastructure.">
-  <meta property="og:type" content="website">
+
+  <!-- Apply saved theme before first paint to avoid a light-mode flash -->
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('vy_resume_theme');
+        if (!theme) theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) { /* no-op */ }
+    })();
+  </script>
 
   <!-- Favicon -->
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23FEF08A'/><text x='50' y='65' font-size='48' font-weight='900' font-family='sans-serif' text-anchor='middle' fill='%2318181B'>VD</text></svg>">
 
+  <!-- Canonical URL & browser chrome color -->
+  <link rel="canonical" href="https://vyndinh.github.io/">
+  <meta name="theme-color" content="#FAF4E6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131316" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Twitter card (share previews) -->
+  <meta property="og:title" content="Vy Dinh — Software Engineer">
+  <meta property="og:description"
+    content="8+ years building and operating high-throughput distributed systems, event streams, and real-time platforms across high-scale infrastructure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vyndinh.github.io/">
+  <meta property="og:image" content="https://vyndinh.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Vy Dinh — Portfolio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vy Dinh — Software Engineer">
+  <meta name="twitter:description"
+    content="8+ years building and operating high-throughput distributed systems, event streams, and real-time platforms.">
+  <meta name="twitter:image" content="https://vyndinh.github.io/og-image.png">
+
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap">
   <link rel="stylesheet" href="styles.css">
 
   <!-- Structured Data / JSON-LD -->
@@ -35,8 +65,7 @@
       "addressCountry": "Vietnam"
     },
     "email": "dnthuyvy@gmail.com",
-    "telephone": "+84902464075",
-    "url": "https://github.com/vyndinh",
+    "url": "https://vyndinh.github.io/",
     "sameAs": [
       "https://github.com/vyndinh",
       "https://linkedin.com/in/vydinhtn"
@@ -59,7 +88,8 @@
             <div class="avatar" title="Vy Dinh — Software Engineer">
               <img src="avatar.jpg" alt="Vy Dinh — Software Engineer (Neobrutalism Avatar)" width="68" height="68">
             </div>
-            <span class="status-indicator-dot" title="Available for opportunities"></span>
+            <span class="status-indicator-dot" role="img" aria-label="Available for opportunities"
+              title="Available for opportunities"></span>
           </div>
           <div class="title-group">
             <h1 class="site-title">
@@ -113,6 +143,13 @@
           <span>Copy Email</span>
         </button>
       </nav>
+
+      <!-- In-page jump navigation -->
+      <nav class="header-jump-nav" aria-label="Section navigation">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </header>
 
     <!-- ====================================================================
@@ -125,7 +162,7 @@
 
       <div class="hero-headline-group">
         <h2 class="hero-headline">Software Engineer</h2>
-        <div class="hero-subdate">HO CHI MINH CITY, VIETNAM • 8+ YEARS IN PRODUCTION</div>
+        <div class="hero-subdate">HO CHI MINH CITY, VIETNAM</div>
       </div>
 
       <div class="hero-inner-box">
@@ -203,7 +240,7 @@
     <section class="experience-list" id="experience" aria-label="Work Experience">
       <div class="section-header">
         <h2 class="section-title">Work Experience</h2>
-        <span class="mono-tag">8+ YEARS IN PRODUCTION</span>
+        <span class="mono-tag">3 COMPANIES · 2017 – 2026</span>
       </div>
 
       <!-- Axon Enterprise -->
@@ -279,8 +316,8 @@
     <section class="neo-card" style="padding: 1.75rem 2rem; display: flex; flex-direction: column; gap: 1.5rem;"
       id="projects" aria-label="Projects and Interactive Playground">
       <div class="section-header">
-        <h2 class="section-title">Open Source & AI Projects</h2>
-        <span class="mono-tag">2026 – PRESENT</span>
+        <h2 class="section-title">Open Source &amp; AI Projects</h2>
+        <span class="mono-tag">SHIPPED 2026</span>
       </div>
 
       <div class="projects-grid">
@@ -347,7 +384,7 @@
             <span class="terminal-dot dot-yellow"></span>
             <span class="terminal-dot dot-green"></span>
           </div>
-          <span class="terminal-title">vnt — vy@terminal:~ (Interactive Shell)</span>
+          <span class="terminal-title">guest@vyndinh:~ (Interactive Shell)</span>
           <div class="terminal-quick-buttons">
             <button class="term-btn" data-cmd="help">help</button>
             <button class="term-btn" data-cmd="summary">summary</button>
@@ -384,7 +421,7 @@
           <span>Git Contributions</span>
         </h2>
         <div class="heatmap-legend">
-          <span id="contributionTotal">840+ contributions in last 26 weeks</span>
+          <span id="contributionTotal">Loading contributions…</span>
           <span style="margin-left: 0.5rem;">Less</span>
           <span class="legend-box git-0" title="0 contributions"></span>
           <span class="legend-box git-1" title="1-2 contributions"></span>
@@ -395,21 +432,11 @@
         </div>
       </div>
 
-      <div class="heatmap-months">
-        <span>Mar</span>
-        <span>Apr</span>
-        <span>May</span>
-        <span>Jun</span>
-        <span>Jul</span>
-        <span>Aug</span>
-      </div>
+      <!-- Month labels are generated by app.js so they always match the rendered grid -->
+      <div class="heatmap-months"></div>
 
       <div class="heatmap-container">
-        <div class="heatmap-days-col">
-          <span>Mon</span>
-          <span>Wed</span>
-          <span>Fri</span>
-        </div>
+        <div class="heatmap-days-col"></div>
         <div class="heatmap-grid" id="heatmapGrid">
           <!-- Populated dynamically via app.js -->
         </div>
@@ -483,27 +510,9 @@
       </div>
 
       <div style="overflow-x: auto; padding-bottom: 0.25rem;">
-        <div class="heatmap-months"
-          style="font-size: 0.7rem; min-width: 680px; padding-left: 1.8rem; margin-bottom: 4px;">
-          <span>Sep</span>
-          <span>Oct</span>
-          <span>Nov</span>
-          <span>Dec</span>
-          <span>Jan</span>
-          <span>Feb</span>
-          <span>Mar</span>
-          <span>Apr</span>
-          <span>May</span>
-          <span>Jun</span>
-          <span>Jul</span>
-          <span>Aug</span>
-        </div>
-        <div class="heatmap-container" style="min-width: 680px;">
-          <div class="heatmap-days-col" style="font-size: 0.65rem;">
-            <span>Mon</span>
-            <span>Wed</span>
-            <span>Fri</span>
-          </div>
+        <div class="heatmap-months" style="font-size: 0.7rem; margin-bottom: 4px;"></div>
+        <div class="heatmap-container">
+          <div class="heatmap-days-col" style="font-size: 0.65rem;"></div>
           <div class="lc-heatmap-grid" id="leetcodeHeatmapGrid">
             <!-- Populated dynamically via app.js -->
           </div>
@@ -516,20 +525,67 @@
     <!-- ====================================================================
          EDUCATION & CREDENTIALS
          ==================================================================== -->
-    <section class="neo-card education-card" aria-label="Education">
-      <div class="edu-info">
-        <span class="mono-tag">ACADEMIC BACKGROUND</span>
-        <h3 class="edu-degree">Bachelor of Science in Physics and Engineering</h3>
-        <p class="edu-dept">Department of Electronics Physics Technology and Informatics</p>
-        <p class="edu-school">University of Science, Ho Chi Minh City, Vietnam</p>
+    <section class="neo-card education-card" aria-label="Education and Hardware Foundation">
+      <div class="edu-header-row">
+        <div class="edu-info">
+          <span class="mono-tag">ACADEMIC BACKGROUND</span>
+          <h3 class="edu-degree">Bachelor of Science in Physics and Engineering</h3>
+          <p class="edu-dept">Department of Electronics Physics Technology and Informatics</p>
+          <p class="edu-school">University of Science, Ho Chi Minh City, Vietnam</p>
+        </div>
+        <span class="exp-date-badge">2011 – 2016</span>
       </div>
-      <span class="exp-date-badge">2011 – 2016</span>
+
+      <div class="edu-content-grid">
+        <div class="edu-details">
+          <p class="edu-narrative">
+            During my university years, I dedicated extensive hands-on laboratory time to <strong>hardware engineering</strong>—designing
+            custom printed circuit boards (PCBs), etching prototypes, and writing low-level firmware for embedded systems and microcontrollers.
+          </p>
+          <div class="edu-highlights">
+            <div class="edu-highlight-item">
+              <span class="edu-highlight-icon">⚡</span>
+              <div><strong>Custom PCB & Circuit Design:</strong> Schematics capture, track routing, physical board etching, and precision soldering for prototype boards.</div>
+            </div>
+            <div class="edu-highlight-item">
+              <span class="edu-highlight-icon">📟</span>
+              <div><strong>Embedded Systems & Firmware:</strong> Low-level C/C++ development for microcontrollers (MCU), interrupt handling, hardware timers, and direct register control.</div>
+            </div>
+            <div class="edu-highlight-item">
+              <span class="edu-highlight-icon">🔌</span>
+              <div><strong>Signal Interfacing & Debugging:</strong> Hardware bus communication (UART, SPI, I2C), sensor telemetry, and oscilloscope signal analysis.</div>
+            </div>
+          </div>
+          <p class="edu-narrative" style="color: var(--text-muted); font-size: 0.88rem;">
+            <em>This physical, bottom-up foundation in hardware architecture, memory constraints, and signal propagation directly informs how I build high-throughput, low-latency distributed systems today.</em>
+          </p>
+          <div class="tech-stack-pills">
+            <span class="mini-tech-tag">Embedded Systems</span>
+            <span class="mini-tech-tag">Circuit Board (PCB)</span>
+            <span class="mini-tech-tag">Microcontrollers (MCU)</span>
+            <span class="mini-tech-tag">C / C++</span>
+            <span class="mini-tech-tag">Hardware Debugging</span>
+            <span class="mini-tech-tag">Signal Analysis</span>
+          </div>
+        </div>
+
+        <div class="edu-illustration-wrapper">
+          <div class="edu-circuit-img-box">
+            <img src="embedded-circuit-board.jpg" alt="Embedded System & Custom PCB Circuit Board Design Illustration" class="edu-circuit-img" loading="lazy">
+            <div class="edu-img-badge">⚡ Hardware Roots</div>
+          </div>
+          <div class="edu-illustration-caption">
+            <span>Custom PCB & Microcontroller</span>
+            <span>Dept. of Electronics Physics</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ====================================================================
          FOOTER & CALL TO ACTION
          ==================================================================== -->
-    <section class="neo-card footer-cta-card" aria-label="Get in Touch">
+    <section class="neo-card footer-cta-card" id="contact" aria-label="Get in Touch">
       <div class="mono-tag"
         style="background-color: var(--bg-card); padding: 0.25rem 0.75rem; border-radius: 9999px; border: 1.5px solid var(--border-color);">
         🚀 LET'S CONNECT

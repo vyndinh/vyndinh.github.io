@@ -2,7 +2,6 @@
 
 [![Website](https://img.shields.io/badge/website-vyndinh.github.io-FBBF24?style=flat-square&logo=google-chrome&logoColor=black)](https://vyndinh.github.io/)
 [![Update Activity](https://github.com/vyndinh/vyndinh.github.io/actions/workflows/update-activity.yml/badge.svg)](https://github.com/vyndinh/vyndinh.github.io/actions/workflows/update-activity.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 
 Live deployment: [**https://vyndinh.github.io/**](https://vyndinh.github.io/)
 
@@ -11,10 +10,12 @@ Live deployment: [**https://vyndinh.github.io/**](https://vyndinh.github.io/)
 ## 🎨 Design & Features
 
 - **Modern Neobrutalism Aesthetic**: High-contrast typography, bold 2.5px borders, hard offset drop shadows, playful accent colors, and tactile micro-interactions.
-- **Dark & Light Mode**: Seamless theme toggling with smooth transitions and persistent state.
+- **Dark & Light Mode**: Seamless theme toggling with smooth transitions and persistent state (applied before first paint — no flash).
+- **Real Activity Heatmaps**: GitHub contribution calendar (26 weeks) and LeetCode submission calendar (52 weeks) rendered from live data, with tooltips and auto-generated month/day labels.
 - **Interactive Mini-Terminal (`vnt`)**: A browser-based CLI emulator supporting interactive commands (`summary`, `skills`, `substack`, `telegram`, `leetcode`, `vnt quote [SYMBOL]`, `contact`, `help`).
 - **Automated Daily Activity Sync**: A GitHub Actions cron workflow queries LeetCode and GitHub stats every 24 hours, generating `data/activity.json` and `data/activity.js` so metrics stay fresh automatically without manual updates.
 - **Core Competencies Filter**: Interactive skill tags to dynamically filter career milestones and projects.
+- **Social Share Card**: `og-image.png` (1200×630) for rich link previews on LinkedIn, X, and Telegram.
 - **Zero Framework Bloat**: Built purely with vanilla HTML5, CSS3, and JavaScript for blazing-fast performance, zero client-side dependencies, and instant initial paint.
 
 ---
@@ -25,8 +26,9 @@ Live deployment: [**https://vyndinh.github.io/**](https://vyndinh.github.io/)
 vyndinh.github.io/
 ├── index.html                 # Main portfolio markup & semantic structure
 ├── styles.css                 # Neobrutalism design system tokens & responsive rules
-├── app.js                     # Terminal simulator, theme toggle, interactive UI logic
-├── avatar.jpg                 # Profile avatar image
+├── app.js                     # Heatmap renderers, terminal simulator, theme toggle, interactive UI logic
+├── avatar.jpg                 # Profile avatar image (256×256 source, displayed at 68px)
+├── og-image.png               # 1200×630 social share card (Open Graph / Twitter)
 ├── data/
 │   ├── activity.json          # Daily snapshot of GitHub & LeetCode metrics
 │   └── activity.js            # Global JavaScript bundle for static zero-CORS loading
