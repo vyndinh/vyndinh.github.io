@@ -38,7 +38,8 @@ async function main() {
     },
     github: {
       username: GITHUB_USERNAME,
-      totalContributions: 1284
+      totalContributions: 0,
+      contributionDays: {}
     }
   };
 
@@ -192,12 +193,15 @@ async function fetchLeetCodeStats(username, fallback) {
 }
 
 /**
- * Queries GitHub for user contribution statistics
+ * Queries GitHub for user contribution statistics.
+ * Primary source: GraphQL API (requires a token). Fallback: the embedded JSON
+ * on the public profile page, which needs no authentication.
  */
 async function fetchGitHubStats(username, fallback) {
   console.log(`📡 Fetching GitHub stats for @${username}...`);
-  const token = process.env.GITHUB_TOKEN;
 
+  // 1. GraphQL with token
+  const token = process.env.GITHUB_TOKEN;
   if (token) {
     try {
       const query = `
@@ -206,6 +210,12 @@ async function fetchGitHubStats(username, fallback) {
             contributionsCollection {
               contributionCalendar {
                 totalContributions
+                weeks {
+                  contributionDays {
+                    date
+                    contributionCount
+                  }
+                }
               }
             }
           }
@@ -227,22 +237,103 @@ async function fetchGitHubStats(username, fallback) {
 
       if (res.ok) {
         const data = await res.json();
-        const total = data?.data?.user?.contributionsCollection?.contributionCalendar?.totalContributions;
-        if (typeof total === 'number' && total > 0) {
-          console.log(`✨ GitHub total contributions: ${total}`);
+        const calendar = data?.data?.user?.contributionsCollection?.contributionCalendar;
+        if (calendar?.weeks?.length) {
+          console.log(`✨ GitHub total contributions: ${calendar.totalContributions}`);
           return {
             username,
-            totalContributions: total
+            totalContributions: calendar.totalContributions,
+            contributionDays: flattenContributionWeeks(calendar.weeks)
           };
         }
+      } else {
+        console.warn(`⚠️ GitHub GraphQL responded with HTTP ${res.status}`);
       }
     } catch (err) {
       console.warn(`⚠️ GitHub GraphQL query failed: ${err.message}`);
     }
+  } else {
+    console.warn('⚠️ No GITHUB_TOKEN set, falling back to public profile page.');
+  }
+
+  // 2. Public profile page (no auth required)
+  try {
+    const scraped = await scrapePublicCalendar(username);
+    if (scraped) {
+      console.log(`✨ GitHub total contributions (public page): ${scraped.totalContributions}`);
+      return {
+        username,
+        totalContributions: scraped.totalContributions,
+        contributionDays: scraped.contributionDays
+      };
+    }
+  } catch (err) {
+    console.warn(`⚠️ Public profile scrape failed: ${err.message}`);
   }
 
   // Fallback to baseline
   return fallback;
+}
+
+/** Converts GraphQL calendar weeks into a flat { 'YYYY-MM-DD': count } map */
+function flattenContributionWeeks(weeks) {
+  const days = {};
+  for (const week of weeks) {
+    for (const day of week.contributionDays || []) {
+      const key = String(day.date).slice(0, 10);
+      days[key] = (days[key] || 0) + (day.contributionCount || 0);
+    }
+  }
+  return days;
+}
+
+/** Parses the public contributions page https://github.com/users/<user>/contributions (no token needed).
+ *  Each day is rendered as a cell with data-date, and its exact count lives in an
+ *  accessibility tooltip like "5 contributions on September 1st." */
+async function scrapePublicCalendar(username) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
+  const res = await fetch(`https://github.com/users/${username}/contributions`, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Accept': 'text/html'
+    },
+    signal: controller.signal
+  });
+  clearTimeout(timeout);
+
+  if (!res.ok) {
+    throw new Error(`GitHub contributions page responded with HTTP ${res.status}`);
+  }
+
+  const html = await res.text();
+
+  // Map cell id → date (cells): data-date="2026-09-01" ... id="contribution-day-component-2-51"
+  const dateById = new Map();
+  const cellRe = /data-date="(\d{4}-\d{2}-\d{2})"[^>]*?id="(contribution-day-component-[\d-]+)"/g;
+  for (const [, date, id] of html.matchAll(cellRe)) {
+    dateById.set(id, date);
+  }
+  if (dateById.size === 0) throw new Error('no contribution cells found on page');
+
+  // Map cell id → tooltip text: for="contribution-day-component-0-0" ... >No contributions on September 7th.<
+  const days = {};
+  const tooltipRe = /for="(contribution-day-component-[\d-]+)"[^>]*>([^<]+)</g;
+  for (const [, id, text] of html.matchAll(tooltipRe)) {
+    const date = dateById.get(id);
+    if (!date) continue;
+    const countMatch = text.match(/(\d+)\s+contributions?\s+on/i);
+    days[date] = countMatch ? parseInt(countMatch[1], 10) : 0;
+  }
+
+  const totalContributions = Object.values(days).reduce((sum, c) => sum + c, 0);
+  if (totalContributions === 0) throw new Error('parsed calendar is empty');
+
+  return {
+    totalContributions,
+    contributionDays: days
+  };
 }
 
 main().catch(err => {

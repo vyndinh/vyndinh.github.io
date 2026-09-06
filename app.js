@@ -41,7 +41,154 @@ function initTheme() {
 }
 
 /* ==========================================================================
-   2. GIT CONTRIBUTIONS ACTIVITY (26 Weeks Grid)
+   2. CALENDAR HEATMAP RENDERING (shared by GitHub & LeetCode grids)
+   Data comes from data/activity.js (window.ACTIVITY_DATA), refreshed daily
+   by GitHub Actions. Columns run Sunday → Saturday like GitHub's own graph.
+   ========================================================================== */
+function parseDateKey(key) {
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function toDateKey(date) {
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  return `${date.getFullYear()}-${mm}-${dd}`;
+}
+
+/**
+ * Builds week columns (oldest → newest) ending at the latest date present in
+ * `days`, so the grid always reflects the freshest data instead of a frozen
+ * hardcoded window.
+ */
+function buildCalendarColumns(days, totalWeeks) {
+  const keys = Object.keys(days).sort();
+  const latest = keys.length ? parseDateKey(keys[keys.length - 1]) : new Date();
+  const endOfWeek = new Date(latest);
+  endOfWeek.setDate(latest.getDate() + (6 - latest.getDay())); // Saturday
+  const start = new Date(endOfWeek);
+  start.setDate(endOfWeek.getDate() - (totalWeeks * 7 - 1)); // Sunday
+
+  const columns = [];
+  for (let w = 0; w < totalWeeks; w++) {
+    const week = [];
+    for (let d = 0; d < 7; d++) {
+      const cur = new Date(start);
+      cur.setDate(start.getDate() + w * 7 + d);
+      if (cur > latest) {
+        week.push(null); // future day in the current week
+      } else {
+        week.push({ date: cur, count: days[toDateKey(cur)] || 0 });
+      }
+    }
+    columns.push(week);
+  }
+  return columns;
+}
+
+function positionTooltip(e) {
+  const tooltip = document.getElementById('heatmapTooltip');
+  if (!tooltip) return;
+  const x = e.clientX + 14;
+  const y = e.clientY - 38;
+  tooltip.style.left = `${Math.min(x, window.innerWidth - 260)}px`;
+  tooltip.style.top = `${Math.max(10, y)}px`;
+}
+
+function renderCalendarHeatmap(opts) {
+  const {
+    grid, tooltip, monthsEl, daysCol, columns,
+    cellSize, gap, cellBaseClass, levelClass,
+    tooltipTitle, tooltipColor, noun,
+  } = opts;
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const singular = noun.replace(/s$/, '');
+  const fragment = document.createDocumentFragment();
+  let prevMonth = null;
+  const monthLabels = [];
+
+  columns.forEach((week, w) => {
+    const firstVisible = week.find(Boolean);
+    if (firstVisible) {
+      const m = firstVisible.date.getMonth();
+      if (prevMonth === null || m !== prevMonth) {
+        monthLabels.push({ column: w, label: monthNames[m] });
+        prevMonth = m;
+      }
+    }
+
+    week.forEach((day) => {
+      const cell = document.createElement('div');
+      if (!day) {
+        cell.className = cellBaseClass;
+        cell.style.visibility = 'hidden';
+      } else {
+        cell.className = `${cellBaseClass} ${levelClass(day.count)}`;
+        const dateStr = `${monthNames[day.date.getMonth()]} ${day.date.getDate()}, ${day.date.getFullYear()}`;
+
+        cell.addEventListener('mouseenter', (e) => {
+          const text = day.count === 0
+            ? `No ${noun} on ${dateStr}`
+            : day.count === 1
+              ? `1 ${singular} on ${dateStr}`
+              : `${day.count} ${noun} on ${dateStr}`;
+
+          tooltip.innerHTML = `
+            <div style="font-size: 0.72rem; color: ${tooltipColor}; font-weight: 800;">${tooltipTitle}</div>
+            <div style="font-weight: 700; color: #FFFFFF; margin-top: 2px;">${text}</div>
+          `;
+          tooltip.style.display = 'block';
+          positionTooltip(e);
+        });
+
+        cell.addEventListener('mousemove', positionTooltip);
+        cell.addEventListener('mouseleave', () => {
+          tooltip.style.display = 'none';
+        });
+      }
+      fragment.appendChild(cell);
+    });
+  });
+
+  grid.appendChild(fragment);
+
+  // Day-of-week labels pinned to exact grid rows (Sunday-first)
+  if (daysCol) {
+    daysCol.innerHTML = '';
+    daysCol.style.display = 'grid';
+    daysCol.style.gridTemplateRows = `repeat(7, ${cellSize}px)`;
+    daysCol.style.gap = `${gap}px`;
+    ['Mon', 'Wed', 'Fri'].forEach((label, i) => {
+      const span = document.createElement('span');
+      span.textContent = label;
+      span.style.gridRowStart = i * 2 + 2; // rows 2, 4, 6
+      span.style.lineHeight = `${cellSize}px`;
+      daysCol.appendChild(span);
+    });
+  }
+
+  // Month labels laid out on a grid matching the cell columns
+  if (monthsEl) {
+    monthsEl.innerHTML = '';
+    monthsEl.style.display = 'grid';
+    monthsEl.style.gridTemplateColumns = `repeat(${columns.length}, ${cellSize}px)`;
+    monthsEl.style.gap = `${gap}px`;
+    const container = grid.parentElement;
+    const containerGap = container
+      ? parseFloat(getComputedStyle(container).columnGap || getComputedStyle(container).gap) || 0
+      : 0;
+    monthsEl.style.paddingLeft = `${(daysCol ? daysCol.offsetWidth : 0) + containerGap}px`;
+    monthLabels.forEach(({ column, label }) => {
+      const span = document.createElement('span');
+      span.textContent = label;
+      span.style.gridColumnStart = column + 1;
+      monthsEl.appendChild(span);
+    });
+  }
+}
+
+/* ==========================================================================
+   3. GIT CONTRIBUTIONS ACTIVITY (26 Weeks, real GitHub data)
    ========================================================================== */
 function initGitContributions() {
   const grid = document.getElementById('heatmapGrid');
@@ -49,100 +196,48 @@ function initGitContributions() {
   const totalEl = document.getElementById('contributionTotal');
   if (!grid || !tooltip) return;
 
-  const totalWeeks = 26;
-  const daysPerWeek = 7;
-  const totalDays = totalWeeks * daysPerWeek;
-  
-  // Reference date: early September 2026
-  const endDate = new Date(2026, 8, 4); // Sep 4, 2026
-  const startDate = new Date(endDate);
-  startDate.setDate(endDate.getDate() - totalDays + 1);
+  const gh = window.ACTIVITY_DATA?.github || {};
+  const days = gh.contributionDays || {};
 
-  // Month names
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  let totalContributions = 0;
-  const fragment = document.createDocumentFragment();
-
-  // Deterministic seed for realistic contribution pattern
-  const seedArray = [
-    0, 2, 4, 1, 0, 5, 3, 2, 6, 8, 4, 0, 3, 5, 2, 7, 9, 3, 1, 0, 4,
-    6, 11, 4, 2, 5, 8, 0, 3, 7, 12, 5, 2, 4, 1, 6, 9, 3, 0, 5, 7, 2,
-    4, 8, 10, 3, 1, 6, 4, 0, 7, 9, 2, 5, 8, 1, 4, 6, 12, 3, 0, 5, 2,
-    7, 4, 8, 1, 3, 6, 0, 4, 9, 11, 5, 2, 6, 3, 1, 7, 8, 4, 0, 5, 10,
-    3, 2, 6, 1, 4, 8, 0, 5, 7, 12, 4, 1, 6, 3, 0, 8, 9, 5, 2, 4, 7,
-    1, 3, 6, 0, 5, 10, 4, 2, 7, 1, 0, 6, 8, 3, 5, 9, 2, 4, 7, 0, 3,
-    6, 11, 4, 1, 5, 8, 2, 0, 7, 10, 3, 6, 4, 1, 5, 9, 0, 3, 8, 2, 6,
-    4, 1, 7, 12, 5, 0, 4, 8, 3, 6, 2, 5, 9, 1, 0, 7, 4, 8, 2, 6, 11,
-    3, 1, 5, 8, 0, 4, 7, 2, 6, 10, 3, 5, 1, 0, 8, 4, 7, 2
-  ];
-
-  for (let w = 0; w < totalWeeks; w++) {
-    for (let d = 0; d < daysPerWeek; d++) {
-      const dayIndex = w * daysPerWeek + d;
-      const curDate = new Date(startDate);
-      curDate.setDate(startDate.getDate() + dayIndex);
-
-      const count = seedArray[dayIndex % seedArray.length];
-      totalContributions += count;
-
-      let level = 0;
-      if (count >= 9) level = 4;
-      else if (count >= 6) level = 3;
-      else if (count >= 3) level = 2;
-      else if (count >= 1) level = 1;
-
-      const cell = document.createElement('div');
-      cell.className = `heatmap-cell git-${level}`;
-
-      const dateStr = `${monthNames[curDate.getMonth()]} ${curDate.getDate()}`;
-      cell.dataset.count = count;
-      cell.dataset.date = dateStr;
-
-      cell.addEventListener('mouseenter', (e) => {
-        const c = parseInt(cell.dataset.count, 10);
-        const text = c === 0 
-          ? `No contributions on ${cell.dataset.date}` 
-          : c === 1 
-            ? `1 contribution on ${cell.dataset.date}` 
-            : `${c} contributions on ${cell.dataset.date}`;
-        
-        tooltip.innerHTML = `
-          <div style="font-size: 0.72rem; color: #4ADE80; font-weight: 800;">GIT COMMIT ACTIVITY</div>
-          <div style="font-weight: 700; color: #FFFFFF; margin-top: 2px;">${text}</div>
-        `;
-        tooltip.style.display = 'block';
-        positionTooltip(e);
-      });
-
-      cell.addEventListener('mousemove', (e) => {
-        positionTooltip(e);
-      });
-
-      cell.addEventListener('mouseleave', () => {
-        tooltip.style.display = 'none';
-      });
-
-      fragment.appendChild(cell);
+  if (Object.keys(days).length === 0) {
+    if (totalEl) {
+      totalEl.textContent = gh.totalContributions
+        ? `${gh.totalContributions.toLocaleString()} contributions in the past year`
+        : 'Contribution data syncs daily';
     }
+    return;
   }
 
-  grid.appendChild(fragment);
+  const columns = buildCalendarColumns(days, 26);
+  renderCalendarHeatmap({
+    grid,
+    tooltip,
+    monthsEl: document.querySelector('.heatmap-card .heatmap-months'),
+    daysCol: document.querySelector('.heatmap-card .heatmap-days-col'),
+    columns,
+    cellSize: 15,
+    gap: 5,
+    cellBaseClass: 'heatmap-cell',
+    levelClass: (count) => {
+      if (count >= 9) return 'git-4';
+      if (count >= 6) return 'git-3';
+      if (count >= 3) return 'git-2';
+      if (count >= 1) return 'git-1';
+      return 'git-0';
+    },
+    tooltipTitle: 'GIT COMMIT ACTIVITY',
+    tooltipColor: '#4ADE80',
+    noun: 'contributions',
+  });
 
   if (totalEl) {
-    totalEl.textContent = `${totalContributions.toLocaleString()} contributions in last 26 weeks`;
-  }
-
-  function positionTooltip(e) {
-    const x = e.clientX + 14;
-    const y = e.clientY - 38;
-    tooltip.style.left = `${Math.min(x, window.innerWidth - 260)}px`;
-    tooltip.style.top = `${Math.max(10, y)}px`;
+    const total = columns.flat().reduce((sum, day) => sum + (day ? day.count : 0), 0);
+    totalEl.textContent = `${total.toLocaleString()} contributions in last 26 weeks`;
   }
 }
 
 /* ==========================================================================
-   3. LEETCODE SUBMISSIONS ACTIVITY (52 Weeks / Past 1 Year from @vyndyn)
+   4. LEETCODE SUBMISSIONS ACTIVITY (52 Weeks / Past 1 Year from @vyndyn)
    ========================================================================== */
 function initLeetCodeActivity() {
   const grid = document.getElementById('leetcodeHeatmapGrid');
@@ -151,35 +246,9 @@ function initLeetCodeActivity() {
 
   // Dynamic LeetCode data from auto-updater (data/activity.js)
   const lcData = window.ACTIVITY_DATA?.leetcode;
-  const leetcodeDates = lcData?.submissionCalendar || {
-    "2026-03-07": 1, "2026-03-08": 1, "2026-03-09": 1, "2026-03-10": 2, "2026-03-11": 1,
-    "2026-03-12": 3, "2026-03-13": 1, "2026-03-15": 1, "2026-03-17": 2, "2026-03-18": 7,
-    "2026-03-19": 1, "2026-03-20": 1, "2026-03-22": 2, "2026-03-23": 1, "2026-03-24": 1,
-    "2026-03-25": 3, "2026-03-26": 6, "2026-03-28": 8, "2026-03-29": 4, "2026-03-30": 4,
-    "2026-03-31": 9, "2026-04-01": 1, "2026-04-02": 4, "2026-04-03": 1, "2026-04-04": 1,
-    "2026-04-05": 7, "2026-04-06": 1, "2026-04-07": 4, "2026-04-08": 1, "2026-04-09": 3,
-    "2026-04-10": 1, "2026-04-11": 3, "2026-04-12": 5, "2026-04-13": 4, "2026-04-14": 2,
-    "2026-04-15": 2, "2026-04-16": 14, "2026-04-17": 1, "2026-04-18": 1, "2026-04-19": 1,
-    "2026-04-20": 6, "2026-04-21": 1, "2026-04-22": 16, "2026-04-23": 7, "2026-04-24": 1,
-    "2026-04-25": 5, "2026-04-26": 1, "2026-04-27": 1, "2026-04-28": 1, "2026-04-29": 1,
-    "2026-04-30": 1, "2026-05-01": 1, "2026-05-02": 1, "2026-05-03": 1, "2026-05-04": 1,
-    "2026-05-05": 1, "2026-05-06": 1, "2026-05-07": 1, "2026-05-08": 2, "2026-05-09": 4,
-    "2026-05-10": 1, "2026-05-11": 2, "2026-05-12": 1, "2026-05-13": 1, "2026-05-14": 3,
-    "2026-05-15": 4, "2026-05-16": 1, "2026-05-17": 1, "2026-05-18": 1, "2026-05-19": 1,
-    "2026-05-20": 2, "2026-05-23": 2, "2026-05-24": 2, "2026-05-25": 2, "2026-05-26": 1,
-    "2026-05-27": 4, "2026-05-28": 1, "2026-05-29": 5, "2026-05-30": 5, "2026-05-31": 11,
-    "2026-06-01": 4, "2026-06-02": 7, "2026-06-03": 7, "2026-06-04": 3, "2026-06-05": 1,
-    "2026-06-06": 2, "2026-06-07": 1, "2026-06-08": 2, "2026-06-09": 3, "2026-06-10": 1,
-    "2026-06-11": 3, "2026-06-12": 5, "2026-06-14": 3, "2026-06-15": 6, "2026-06-16": 15,
-    "2026-06-17": 9, "2026-06-18": 8, "2026-06-19": 1, "2026-06-21": 1, "2026-06-23": 1,
-    "2026-06-25": 2, "2026-06-26": 4, "2026-06-27": 5, "2026-06-29": 3, "2026-06-30": 6,
-    "2026-07-01": 10, "2026-07-02": 1, "2026-07-03": 1, "2026-07-05": 1, "2026-07-07": 1,
-    "2026-07-09": 1, "2026-07-15": 1, "2026-07-16": 5, "2026-08-12": 2, "2026-08-15": 1,
-    "2026-08-17": 5, "2026-08-19": 3, "2026-08-24": 1, "2026-08-28": 4, "2026-08-29": 7,
-    "2026-09-01": 23, "2026-09-02": 2
-  };
+  const days = lcData?.submissionCalendar || {};
 
-  // Dynamically update metrics if available
+  // Dynamically update metrics when data is available (HTML holds a static snapshot as fallback)
   if (lcData) {
     const totalEl = document.getElementById('lcTotalSolved');
     const easyEl = document.getElementById('lcEasySolved');
@@ -227,79 +296,28 @@ function initLeetCodeActivity() {
     if (labelHard) labelHard.textContent = `Hard ${lcData.hardSolved} (${Math.round(hardPct)}%)`;
   }
 
-  const totalWeeks = 52;
-  const daysPerWeek = 7;
-  const totalDays = totalWeeks * daysPerWeek; // 364 days
+  if (Object.keys(days).length === 0) return;
 
-  const endDate = new Date(2026, 8, 4); // Sep 4, 2026
-  const startDate = new Date(endDate);
-  startDate.setDate(endDate.getDate() - totalDays + 1);
-
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const fragment = document.createDocumentFragment();
-
-  for (let w = 0; w < totalWeeks; w++) {
-    for (let d = 0; d < daysPerWeek; d++) {
-      const dayIndex = w * daysPerWeek + d;
-      const curDate = new Date(startDate);
-      curDate.setDate(startDate.getDate() + dayIndex);
-
-      const yyyy = curDate.getFullYear();
-      const mm = String(curDate.getMonth() + 1).padStart(2, '0');
-      const dd = String(curDate.getDate()).padStart(2, '0');
-      const dateKey = `${yyyy}-${mm}-${dd}`;
-
-      const count = leetcodeDates[dateKey] || 0;
-
-      let level = 0;
-      if (count >= 11) level = 4;
-      else if (count >= 6) level = 3;
-      else if (count >= 3) level = 2;
-      else if (count >= 1) level = 1;
-
-      const cell = document.createElement('div');
-      cell.className = `lc-cell lc-${level}`;
-
-      const dateStr = `${monthNames[curDate.getMonth()]} ${curDate.getDate()}, ${yyyy}`;
-      cell.dataset.count = count;
-      cell.dataset.date = dateStr;
-
-      cell.addEventListener('mouseenter', (e) => {
-        const c = parseInt(cell.dataset.count, 10);
-        const text = c === 0 
-          ? `No submissions on ${cell.dataset.date}` 
-          : c === 1 
-            ? `1 submission on ${cell.dataset.date}` 
-            : `${c} submissions on ${cell.dataset.date}`;
-        
-        tooltip.innerHTML = `
-          <div style="font-size: 0.72rem; color: #F59E0B; font-weight: 800;">LEETCODE SUBMISSIONS</div>
-          <div style="font-weight: 700; color: #FFFFFF; margin-top: 2px;">${text}</div>
-        `;
-        tooltip.style.display = 'block';
-        positionTooltip(e);
-      });
-
-      cell.addEventListener('mousemove', (e) => {
-        positionTooltip(e);
-      });
-
-      cell.addEventListener('mouseleave', () => {
-        tooltip.style.display = 'none';
-      });
-
-      fragment.appendChild(cell);
-    }
-  }
-
-  grid.appendChild(fragment);
-
-  function positionTooltip(e) {
-    const x = e.clientX + 14;
-    const y = e.clientY - 38;
-    tooltip.style.left = `${Math.min(x, window.innerWidth - 260)}px`;
-    tooltip.style.top = `${Math.max(10, y)}px`;
-  }
+  renderCalendarHeatmap({
+    grid,
+    tooltip,
+    monthsEl: document.querySelector('.leetcode-card .heatmap-months'),
+    daysCol: document.querySelector('.leetcode-card .heatmap-days-col'),
+    columns: buildCalendarColumns(days, 52),
+    cellSize: 11,
+    gap: 3,
+    cellBaseClass: 'lc-cell',
+    levelClass: (count) => {
+      if (count >= 11) return 'lc-4';
+      if (count >= 6) return 'lc-3';
+      if (count >= 3) return 'lc-2';
+      if (count >= 1) return 'lc-1';
+      return 'lc-0';
+    },
+    tooltipTitle: 'LEETCODE SUBMISSIONS',
+    tooltipColor: '#F59E0B',
+    noun: 'submissions',
+  });
 }
 
 /* ==========================================================================
@@ -311,6 +329,8 @@ function initSkillSpotlight() {
 
   let activeSkill = null;
 
+  skillPills.forEach(pill => pill.setAttribute('aria-pressed', 'false'));
+
   skillPills.forEach(pill => {
     pill.addEventListener('click', () => {
       const skillName = pill.dataset.skill.toLowerCase();
@@ -319,16 +339,22 @@ function initSkillSpotlight() {
         // Reset filter
         activeSkill = null;
         pill.classList.remove('active');
+        pill.setAttribute('aria-pressed', 'false');
         clearHighlights();
         return;
       }
 
       // Activate new filter
-      skillPills.forEach(p => p.classList.remove('active'));
+      skillPills.forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('aria-pressed', 'false');
+      });
       pill.classList.add('active');
+      pill.setAttribute('aria-pressed', 'true');
       activeSkill = skillName;
 
       let firstMatch = null;
+      let matchCount = 0;
 
       targetCards.forEach(card => {
         const keywords = (card.dataset.keywords || '').toLowerCase();
@@ -337,6 +363,7 @@ function initSkillSpotlight() {
         if (keywords.includes(skillName) || text.includes(skillName)) {
           card.classList.add('highlight-match');
           if (!firstMatch) firstMatch = card;
+          matchCount++;
         } else {
           card.classList.remove('highlight-match');
         }
@@ -344,6 +371,8 @@ function initSkillSpotlight() {
 
       if (firstMatch) {
         firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        showToast(`No career highlights for "${pill.textContent.trim()}"`);
       }
     });
   });
@@ -413,9 +442,18 @@ function initTerminal() {
         appendLine('  telegram      - Daily Engineering News Telegram Bot (@dy_engineering_bot)');
         appendLine('  leetcode      - LeetCode problem solving metrics');
         appendLine('  experience    - Overview of 8+ years across companies');
-        appendLine('  vnt quote [T] - Real-time terminal quote (e.g. vnt quote FPT, VNM, VHM)');
+        appendLine('  education     - Academic background & embedded systems roots');
+        appendLine('  vnt quote [T] - Stock quote demo (e.g. vnt quote FPT, VNM, VHM)');
         appendLine('  contact       - Email, phone, LinkedIn, GitHub, Substack, Telegram');
         appendLine('  clear         - Clear terminal display');
+        break;
+
+      case 'education':
+      case 'academic':
+        appendLine('Academic Background & Embedded Systems (2011 – 2016):', 'warning');
+        appendLine('• B.S. in Physics and Engineering — University of Science, HCMC', 'success');
+        appendLine('• Dept. of Electronics Physics Technology and Informatics', 'info');
+        appendLine('• Hands-on focus: End-to-end embedded systems across both hardware (custom PCB design) and software (low-level C/C++ firmware).', 'info');
         break;
 
       case 'summary':
@@ -468,19 +506,16 @@ function initTerminal() {
       case 'experience':
         appendLine('Career Journey:', 'warning');
         appendLine('• Axon Enterprise (2021 – 2026, 5 yrs): Video Transcoding Orchestration, Go, Kafka, Flink', 'success');
-        appendLine('• Wizeline (2020 – 2021): Real-time Geospatial Microservices, Go, Spatial SQL', 'info');
+        appendLine('• Pascalia Asia (2020 – 2021): Backend services & real-time ingestion, Java, Spring Boot, AWS', 'info');
         appendLine('• DEK Technologies (2017 – 2020): Telecom Routing, C++, OpenStack, Jenkins', 'info');
         break;
 
       case 'quote':
-      case 'vnt':
-        const symbol = parts[1] === 'quote' ? (parts[2] || 'FPT') : (parts[1] || 'FPT');
-        if (typeof renderQuote === 'function') {
-          renderQuote(symbol);
-        } else {
-          renderQuote('FPT');
-        }
+      case 'vnt': {
+        const arg = parts[1] === 'quote' ? parts[2] : parts[1];
+        renderQuote((arg || 'FPT').toUpperCase());
         break;
+      }
 
       case 'contact':
         appendLine('Email:    dnthuyvy@gmail.com', 'success');
@@ -515,7 +550,7 @@ function initTerminal() {
     appendLine(`─── [VN STOCK CLI • HOSE:${ticker}] ─────────────────────────`, 'info');
     appendLine(`Price: ${q.price} VND | Change: ${q.change} | Vol: ${q.vol}`, 'success');
     appendLine(`TA Metrics: RSI(14) = ${q.rsi} | MACD = Bullish Cross | Signal: ${q.signal}`, 'warning');
-    appendLine(`Data engine: Go + Bubble Tea TUI + SQLite persistence`, 'info');
+    appendLine(`Data engine: Go + Bubble Tea TUI + SQLite persistence (demo data)`, 'info');
   }
 
   function appendLine(text, className = '') {
