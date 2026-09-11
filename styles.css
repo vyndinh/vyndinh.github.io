@@ -97,7 +97,7 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 14px;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -107,19 +107,22 @@ body {
   font-family: var(--font-sans);
   background-color: var(--bg-page);
   color: var(--text-main);
-  line-height: 1.55;
+  line-height: 1.45;
   min-height: 100vh;
-  padding: 2.5rem 1.25rem 4rem;
+  padding: 1.5rem 1.15rem 2.75rem;
+  overflow-x: hidden;
   transition: background-color var(--trans-fast), color var(--trans-fast);
 }
 
 /* Global Container */
 .site-wrapper {
   max-width: 860px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1.1rem;
+  min-width: 0;
 }
 
 /* ==========================================================================
@@ -131,13 +134,13 @@ body {
   justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-main);
   background-color: var(--bg-card);
   border: var(--border);
   border-radius: var(--radius-full);
-  padding: 0.45rem 1.15rem;
+  padding: 0.32rem 0.9rem;
   text-decoration: none;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
@@ -183,11 +186,35 @@ body {
 }
 
 .neo-btn-icon {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.2rem;
+  height: 2.2rem;
   padding: 0;
   border-radius: 50%;
-  font-size: 1.1rem;
+  font-size: 1rem;
+}
+
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.neo-btn .brand-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.neo-btn .brand-icon-linkedin {
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.project-links .brand-icon {
+  width: 14px;
+  height: 14px;
 }
 
 /* ==========================================================================
@@ -196,7 +223,8 @@ body {
 .header-card {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.8rem;
+  min-width: 0;
 }
 
 .header-top {
@@ -217,9 +245,9 @@ body {
 }
 
 .avatar {
-  width: 68px;
-  height: 68px;
-  border-radius: 18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   border: var(--border-thick);
   box-shadow: 3px 3px 0px var(--shadow-color);
   background-color: var(--bg-card);
@@ -248,8 +276,8 @@ body {
   position: absolute;
   bottom: -2px;
   right: -2px;
-  width: 15px;
-  height: 15px;
+  width: 12px;
+  height: 12px;
   background-color: #22C55E;
   border: 2px solid var(--border-color);
   border-radius: 50%;
@@ -261,21 +289,21 @@ body {
 }
 
 .site-title {
-  font-size: 2.25rem;
+  font-size: 1.65rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .verified-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   background-color: #3B82F6;
   color: white;
   border-radius: 50%;
@@ -290,10 +318,11 @@ body {
 }
 
 .bio-text {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.45;
   font-weight: 500;
+  overflow-wrap: break-word;
 }
 
 .header-pill-nav {
@@ -313,7 +342,7 @@ body {
 
 .header-jump-nav a {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -340,6 +369,8 @@ body {
   box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
+  min-width: 0;
+  max-width: 100%;
   transition: box-shadow var(--trans-bounce), transform var(--trans-bounce);
 }
 
@@ -350,10 +381,10 @@ body {
 /* Hero Status Watch Card (Matches "90% chance of reset" card) */
 .hero-card {
   background-color: var(--accent-yellow);
-  padding: 1.6rem 1.8rem;
+  padding: 1.1rem 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.8rem;
 }
 
 [data-theme="dark"] .hero-card {
@@ -371,7 +402,7 @@ body {
 
 .mono-tag {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -388,7 +419,7 @@ body {
 }
 
 .hero-headline {
-  font-size: 2.1rem;
+  font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -396,7 +427,7 @@ body {
 
 .hero-subdate {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -406,12 +437,14 @@ body {
 .hero-inner-box {
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: var(--radius-md);
-  padding: 1.15rem 1.35rem;
-  font-size: 1rem;
+  padding: 0.75rem 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: #18181B;
-  line-height: 1.55;
+  line-height: 1.45;
   border: 1.5px dashed rgba(24, 24, 27, 0.25);
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 
 [data-theme="dark"] .hero-inner-box {
@@ -433,7 +466,7 @@ body {
 }
 
 .section-title {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   display: flex;
@@ -444,9 +477,9 @@ body {
 .heatmap-legend {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.7rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -539,10 +572,10 @@ body {
 }
 
 .heatmap-card {
-  padding: 1.5rem 1.75rem;
+  padding: 1.15rem 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   overflow-x: auto;
 }
 
@@ -550,7 +583,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--text-dim);
   padding-left: 2rem;
@@ -669,10 +702,10 @@ body {
    LEETCODE STATS & 52-WEEK HEATMAP CARD
    ========================================================================== */
 .leetcode-card {
-  padding: 1.6rem 1.85rem;
+  padding: 1.15rem 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.85rem;
 }
 
 .leetcode-metrics-row {
@@ -686,11 +719,11 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.35rem 0.75rem;
+  padding: 0.25rem 0.6rem;
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--border-color);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
   box-shadow: 2px 2px 0px var(--border-color);
 }
@@ -862,10 +895,10 @@ body {
    SKILL TAGS & INTERACTIVE SPOTLIGHT
    ========================================================================== */
 .skills-card {
-  padding: 1.75rem;
+  padding: 1.15rem 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.85rem;
 }
 
 .skills-category {
@@ -876,7 +909,7 @@ body {
 
 .skills-category-title {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -890,16 +923,20 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .skill-pill {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   font-weight: 700;
   background-color: var(--bg-card);
   border: var(--border-sm);
   border-radius: var(--radius-full);
-  padding: 0.35rem 0.85rem;
+  padding: 0.22rem 0.65rem;
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
   color: var(--text-main);
   box-shadow: 1.5px 1.5px 0px var(--shadow-color);
   cursor: pointer;
@@ -931,14 +968,14 @@ body {
 .experience-list {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1rem;
 }
 
 .exp-card {
-  padding: 1.85rem 2rem;
+  padding: 1.25rem 1.4rem;
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 0.9rem;
 }
 
 .exp-header {
@@ -962,14 +999,14 @@ body {
 }
 
 .exp-role {
-  font-size: 1.4rem;
+  font-size: 1.08rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 .exp-company {
-  font-size: 1.05rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--text-muted);
   display: flex;
@@ -996,21 +1033,21 @@ body {
 
 .exp-date-badge {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 800;
   background-color: var(--bg-card-alt);
   border: var(--border-sm);
   border-radius: var(--radius-sm);
-  padding: 0.35rem 0.75rem;
+  padding: 0.22rem 0.55rem;
   box-shadow: 1.5px 1.5px 0px var(--shadow-color);
   color: var(--text-main);
 }
 
 .exp-card-compact {
-  padding: 1.4rem 1.6rem;
+  padding: 0.95rem 1.15rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.45rem;
 }
 
 .exp-card.highlight-match,
@@ -1029,9 +1066,9 @@ body {
 
 .mini-tech-tag {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  padding: 0.15rem 0.5rem;
+  padding: 0.1rem 0.4rem;
   border-radius: var(--radius-sm);
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -1041,24 +1078,47 @@ body {
 /* ==========================================================================
    FEATURED PROJECTS & MINI-TERMINAL
    ========================================================================== */
+.projects-section {
+  padding: 1.15rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+  gap: 0.9rem;
 }
 
 @media (max-width: 768px) {
+  html {
+    font-size: 13px;
+  }
+
+  body {
+    padding: 1rem 0.85rem 2rem;
+  }
+
+  .site-title {
+    font-size: 1.45rem;
+  }
+
+  .hero-headline {
+    font-size: 1.25rem;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
 }
 
 .project-card {
-  padding: 1.5rem;
+  padding: 1.05rem 1.15rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.7rem;
 }
 
 .project-top {
@@ -1071,10 +1131,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
 .project-name {
-  font-size: 1.25rem;
+  font-size: 1.02rem;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -1085,9 +1147,10 @@ body {
 }
 
 .project-desc {
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.4;
+  overflow-wrap: break-word;
 }
 
 /* Interactive CLI Terminal Window */
@@ -1108,6 +1171,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
 .terminal-dots {
@@ -1141,6 +1206,7 @@ body {
 
 .terminal-quick-buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.4rem;
 }
 
@@ -1163,12 +1229,12 @@ body {
 }
 
 .terminal-body {
-  padding: 1.25rem 1.4rem;
-  min-height: 180px;
-  max-height: 280px;
+  padding: 0.9rem 1.1rem;
+  min-height: 140px;
+  max-height: 220px;
   overflow-y: auto;
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.78rem;
+  line-height: 1.45;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -1215,17 +1281,17 @@ body {
   outline: none;
   color: #F4F4F5;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
 }
 
 /* ==========================================================================
    EDUCATION & CONTACT SECTION
    ========================================================================== */
 .education-card {
-  padding: 1.8rem 2rem;
+  padding: 1.15rem 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.85rem;
 }
 
 .edu-header-row {
@@ -1243,19 +1309,19 @@ body {
 }
 
 .edu-degree {
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   font-weight: 800;
   line-height: 1.3;
 }
 
 .edu-dept {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
   font-weight: 500;
 }
 
 .edu-school {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-main);
 }
@@ -1276,17 +1342,17 @@ body {
 }
 
 .edu-narrative {
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.45;
   color: var(--text-main);
 }
 
 .edu-highlights {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.88rem;
-  line-height: 1.5;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
   color: var(--text-main);
 }
 
@@ -1340,13 +1406,13 @@ body {
 /* Quick Contact / Footer Box */
 .footer-cta-card {
   background-color: var(--accent-pink);
-  padding: 2rem;
+  padding: 1.35rem 1.4rem;
   border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.25rem;
+  gap: 0.85rem;
 }
 
 [data-theme="dark"] .footer-cta-card {
@@ -1355,14 +1421,14 @@ body {
 }
 
 .footer-cta-title {
-  font-size: 2rem;
+  font-size: 1.35rem;
   font-weight: 900;
   letter-spacing: -0.03em;
 }
 
 .footer-cta-desc {
   max-width: 580px;
-  font-size: 1rem;
+  font-size: 0.88rem;
   color: var(--text-main);
   font-weight: 600;
 }

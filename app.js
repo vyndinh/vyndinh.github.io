@@ -354,7 +354,6 @@ function initSkillSpotlight() {
       activeSkill = skillName;
 
       let firstMatch = null;
-      let matchCount = 0;
 
       targetCards.forEach(card => {
         const keywords = (card.dataset.keywords || '').toLowerCase();
@@ -363,16 +362,22 @@ function initSkillSpotlight() {
         if (keywords.includes(skillName) || text.includes(skillName)) {
           card.classList.add('highlight-match');
           if (!firstMatch) firstMatch = card;
-          matchCount++;
         } else {
           card.classList.remove('highlight-match');
         }
       });
 
+      // Skills with no job/project match still highlight all work experience
+      // so the page never ends on an empty "no highlights" state.
+      if (!firstMatch) {
+        document.querySelectorAll('.exp-card').forEach((card) => {
+          card.classList.add('highlight-match');
+        });
+        firstMatch = document.querySelector('.exp-card');
+      }
+
       if (firstMatch) {
         firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        showToast(`No career highlights for "${pill.textContent.trim()}"`);
       }
     });
   });
