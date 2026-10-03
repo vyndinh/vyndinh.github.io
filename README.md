@@ -9,7 +9,7 @@ Live deployment: [**https://vyndinh.github.io/**](https://vyndinh.github.io/)
 
 ## 🎨 Design & Features
 
-- **Modern Neobrutalism Aesthetic**: High-contrast typography, bold 2.5px borders, hard offset drop shadows, playful accent colors, and tactile micro-interactions.
+- **Spatial Studio Design**: Soft neutral surfaces, forest-green accents, generous typography, and a custom 3D software workspace illustration with gentle float and pointer-responsive depth. No 3D runtime required; the transparent image is bundled locally in `assets/software-workspace.png`. Motion respects reduced-motion preferences; touch devices keep a stable perspective.
 - **Dark & Light Mode**: Seamless theme toggling with smooth transitions and persistent state (applied before first paint — no flash).
 - **Real Activity Heatmaps**: GitHub contribution calendar (26 weeks) and LeetCode submission calendar (52 weeks) rendered from live data, with tooltips and auto-generated month/day labels.
 - **Interactive Mini-Terminal (`vnt`)**: A browser-based CLI emulator supporting interactive commands (`summary`, `skills`, `substack`, `telegram`, `leetcode`, `vnt quote [SYMBOL]`, `contact`, `help`).
@@ -25,7 +25,7 @@ Live deployment: [**https://vyndinh.github.io/**](https://vyndinh.github.io/)
 ```text
 vyndinh.github.io/
 ├── index.html                 # Main portfolio markup & semantic structure
-├── styles.css                 # Neobrutalism design system tokens & responsive rules
+├── styles.css                 # Design system tokens, 3D illustration & responsive rules
 ├── app.js                     # Heatmap renderers, terminal simulator, theme toggle, interactive UI logic
 ├── avatar.jpg                 # Profile avatar image (256×256 source, displayed at 68px)
 ├── og-image.png               # 1200×630 social share card (Open Graph / Twitter)

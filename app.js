@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTerminal();
   initEmailCopy();
   initSmoothScroll();
+  initSpatialHero();
 });
 
 /* ==========================================================================
@@ -610,8 +611,29 @@ function initSmoothScroll() {
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         e.preventDefault();
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        targetElement.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
       }
     });
   });
+}
+
+// Pointer response is decorative; touch and reduced-motion users get a stable scene.
+function initSpatialHero() {
+  const art = document.querySelector('.system-art');
+  if (!art) return;
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  function reset() {
+    art.style.removeProperty('--tilt-x');
+    art.style.removeProperty('--tilt-y');
+  }
+  art.addEventListener('pointermove', (event) => {
+    if (motion.matches || !pointer.matches) return;
+    const bounds = art.getBoundingClientRect();
+    art.style.setProperty('--tilt-x', `${-((event.clientY - bounds.top) / bounds.height - .5) * 10}deg`);
+    art.style.setProperty('--tilt-y', `${((event.clientX - bounds.left) / bounds.width - .5) * 12}deg`);
+  });
+  art.addEventListener('pointerleave', reset);
+  motion.addEventListener('change', reset);
+  pointer.addEventListener('change', reset);
 }
