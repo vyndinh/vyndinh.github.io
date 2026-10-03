@@ -45,6 +45,8 @@
     content="8+ years building and operating high-throughput distributed systems, event streams, and real-time platforms.">
   <meta name="twitter:image" content="https://vyndinh.github.io/og-image.png">
 
+  <link rel="preload" as="image" href="assets/developer-overhead-wave-v2.png">
+
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -186,10 +188,16 @@
         </div>
         <div class="hero-proof"><span><strong>8+</strong> years of engineering</span><span><strong>5</strong> years at Axon</span></div>
       </div>
-      <div class="system-art" aria-hidden="true">
-        <div class="art-grid"></div>
+      <div class="system-art">
+        <div class="art-grid" aria-hidden="true"></div>
         <div class="scene-parallax">
           <img class="software-illustration" src="assets/software-workspace.png" alt="" width="1254" height="1254" fetchpriority="high">
+        </div>
+        <div class="developer-companion" data-spot="0">
+          <p class="companion-bubble" id="companionMessage" role="status" aria-live="polite">Hi! Tap me 👋</p>
+          <button class="companion-button" type="button" aria-label="Say hello to the developer companion" aria-describedby="companionMessage">
+            <span class="companion-waver" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
     </section>
@@ -562,7 +570,7 @@
         <figure class="edu-illustration-wrapper">
           <div class="edu-circuit-img-box">
             <img src="embedded-circuit-board.jpg" alt="Embedded System & Custom PCB Circuit Board Design Illustration"
-              class="edu-circuit-img" width="112" height="84" loading="lazy">
+              class="edu-circuit-img" width="176" height="132" loading="lazy">
           </div>
           <figcaption>University work<br>2011–2016</figcaption>
         </figure>

@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEmailCopy();
   initSmoothScroll();
   initSpatialHero();
+  initDeveloperCompanion();
 });
 
 /* ==========================================================================
@@ -636,4 +637,41 @@ function initSpatialHero() {
   art.addEventListener('pointerleave', reset);
   motion.addEventListener('change', reset);
   pointer.addEventListener('change', reset);
+}
+
+// A local, keyboard-accessible character interaction beside the hero laptop.
+function initDeveloperCompanion() {
+  const companion = document.querySelector('.developer-companion');
+  if (!companion) return;
+  const button = companion.querySelector('button');
+  const message = document.getElementById('companionMessage');
+  const greetings = ['Hello, world! 👋', 'One more bug fixed! ✨', 'Coffee → code → repeat ☕', 'Ready to build something?'];
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let hovered = false;
+  let focused = false;
+  let visible = true;
+  function updateMotion() {
+    companion.classList.toggle('is-excited', hovered || focused);
+    companion.classList.toggle('is-paused', document.hidden || !visible || motion.matches);
+  }
+  button.addEventListener('pointerenter', () => { hovered = true; updateMotion(); });
+  button.addEventListener('pointerleave', () => { hovered = false; updateMotion(); });
+  button.addEventListener('focus', () => { focused = true; updateMotion(); });
+  button.addEventListener('blur', () => { focused = false; updateMotion(); });
+  document.addEventListener('visibilitychange', updateMotion);
+  motion.addEventListener('change', updateMotion);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      updateMotion();
+    }).observe(companion.closest('.system-art'));
+  }
+  updateMotion();
+  let clicks = 0;
+  button.addEventListener('click', () => {
+    message.textContent = greetings[clicks % greetings.length];
+    updateMotion();
+    clicks += 1;
+
+  });
 }
