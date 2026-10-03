@@ -1733,11 +1733,3 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
   .companion-waver { background-image: url('assets/developer-companion.png'); background-size: contain; background-position: center; }
 }
 @media print { .developer-companion { display: none; } }
-
-/* Hover/focus swaps to an overhead, two-handed wave without moving the hit target. */
-.is-excited .companion-waver { background-image: url('assets/developer-overhead-wave-v2.png'); background-size: 300% 100%; animation-name: companion-overhead-wave; animation-duration: 1.2s; }
-/* Align each pose around her torso; the generated frames have unequal side padding. */
-@keyframes companion-overhead-wave { 0%, 100% { background-position-x: 6.25%; } 25%, 75% { background-position-x: 50.78%; } 50% { background-position-x: 94.53%; } }
-@media (prefers-reduced-motion: reduce) {
-  .is-excited .companion-waver { background-position: 6.25% 50%; }
-}

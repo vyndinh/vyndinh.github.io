@@ -647,17 +647,10 @@ function initDeveloperCompanion() {
   const message = document.getElementById('companionMessage');
   const greetings = ['Hello, world! 👋', 'One more bug fixed! ✨', 'Coffee → code → repeat ☕', 'Ready to build something?'];
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let hovered = false;
-  let focused = false;
   let visible = true;
   function updateMotion() {
-    companion.classList.toggle('is-excited', hovered || focused);
     companion.classList.toggle('is-paused', document.hidden || !visible || motion.matches);
   }
-  button.addEventListener('pointerenter', () => { hovered = true; updateMotion(); });
-  button.addEventListener('pointerleave', () => { hovered = false; updateMotion(); });
-  button.addEventListener('focus', () => { focused = true; updateMotion(); });
-  button.addEventListener('blur', () => { focused = false; updateMotion(); });
   document.addEventListener('visibilitychange', updateMotion);
   motion.addEventListener('change', updateMotion);
   if ('IntersectionObserver' in window) {
