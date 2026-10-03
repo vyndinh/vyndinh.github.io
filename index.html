@@ -50,7 +50,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=20260912">
+  <link rel="stylesheet" href="styles.css?v=20261004">
 
   <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
@@ -75,6 +75,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
   <svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true">
     <symbol id="icon-github" viewBox="0 0 24 24">
@@ -98,7 +99,7 @@
         <div class="header-profile">
           <div class="avatar-wrapper">
             <div class="avatar" title="Vy Dinh — Software Engineer">
-              <img src="avatar.jpg" alt="Vy Dinh — Software Engineer (Neobrutalism Avatar)" width="52" height="52">
+              <img src="avatar.jpg" alt="Vy Dinh — Software Engineer" width="52" height="52">
             </div>
             <span class="status-indicator-dot" role="img" aria-label="Available for opportunities"
               title="Available for opportunities"></span>
@@ -173,84 +174,26 @@
     <!-- ====================================================================
          HERO STATUS CARD (Matches "90% chance of reset" card)
          ==================================================================== -->
-    <section class="neo-card hero-card" aria-label="Engineering Focus & Status">
-      <div class="hero-top-meta">
-        <span class="mono-tag">👀 CURRENT FOCUS</span>
-      </div>
-
-      <div class="hero-headline-group">
-        <h2 class="hero-headline">Software Engineer</h2>
-        <div class="hero-subdate">HO CHI MINH CITY, VIETNAM</div>
-      </div>
-
-      <div class="hero-inner-box">
-        I have experience in high-throughput distributed systems, stream processing, and reliable backend
-        microservices. I take pride in seeing features through the entire lifecycle, from technical system design and
-        implementation to production deployments and on-call operations.
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         TECHNICAL SKILLS MATRIX (Interactive Spotlight)
-         ==================================================================== -->
-    <section class="neo-card skills-card" id="skills" aria-label="Technical Skills">
-      <div class="section-header">
-        <h2 class="section-title">Core Competencies</h2>
-        <span class="mono-tag">👉 Click any skill to filter career highlights</span>
-      </div>
-
-      <div class="skills-category">
-        <span class="skills-category-title">Back-End & Distributed Systems</span>
-        <div class="tags-wrap">
-          <button class="skill-pill" data-skill="Golang">Golang</button>
-          <button class="skill-pill" data-skill="Java">Java</button>
-          <button class="skill-pill" data-skill="C++">C++</button>
-          <button class="skill-pill" data-skill="Kafka">Kafka</button>
-          <button class="skill-pill" data-skill="Flink">Flink</button>
-          <button class="skill-pill" data-skill="Elasticsearch">Elasticsearch</button>
-          <button class="skill-pill" data-skill="SQL">SQL / Spatial SQL</button>
-          <button class="skill-pill" data-skill="ActiveMQ">ActiveMQ</button>
-          <button class="skill-pill" data-skill="Blob Storage">Blob Storage</button>
-          <button class="skill-pill" data-skill="REST APIs">REST APIs & OpenAPI</button>
-          <button class="skill-pill" data-skill="Vert.x">Vert.x</button>
+    <main id="main-content">
+    <section class="neo-card hero-card" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="hero-eyebrow"><span class="availability-dot"></span> SOFTWARE ENGINEER · HO CHI MINH CITY</div>
+        <h2 class="hero-headline" id="hero-title">Thoughtful code.<br>Systems that<br><em>scale.</em></h2>
+        <p class="hero-description">I’m Vy. I build distributed systems, real-time pipelines, and reliable backends — from the first idea to life in production.</p>
+        <div class="hero-actions">
+          <a class="hero-primary" href="#projects">Explore my work <span aria-hidden="true">↗</span></a>
+          <a class="hero-secondary" href="#contact">Let’s connect <span aria-hidden="true">↗</span></a>
         </div>
+        <div class="hero-proof"><span><strong>8+</strong> years of engineering</span><span><strong>5</strong> years at Axon</span></div>
       </div>
-
-      <div class="skills-category">
-        <span class="skills-category-title">Cloud, DevOps & Infrastructure</span>
-        <div class="tags-wrap">
-          <button class="skill-pill" data-skill="Kubernetes">Kubernetes</button>
-          <button class="skill-pill" data-skill="Docker">Docker</button>
-          <button class="skill-pill" data-skill="GitOps">GitOps</button>
-          <button class="skill-pill" data-skill="Helm">Helm</button>
-          <button class="skill-pill" data-skill="ArgoCD">ArgoCD</button>
-          <button class="skill-pill" data-skill="Terraform">Terraform</button>
-          <button class="skill-pill" data-skill="AWS">AWS (EC2, S3, RDS, Kinesis, Cognito)</button>
-          <button class="skill-pill" data-skill="OpenStack">OpenStack</button>
-        </div>
-      </div>
-
-      <div class="skills-category">
-        <span class="skills-category-title">Monitoring & Site Reliability</span>
-        <div class="tags-wrap">
-          <button class="skill-pill" data-skill="Grafana">Grafana</button>
-          <button class="skill-pill" data-skill="Prometheus">Prometheus</button>
-          <button class="skill-pill" data-skill="OpenTelemetry">OpenTelemetry</button>
-          <button class="skill-pill" data-skill="Splunk">Splunk</button>
-          <button class="skill-pill" data-skill="SLO">SLOs & Incident Triage</button>
-        </div>
-      </div>
-
-      <div class="skills-category">
-        <span class="skills-category-title">AI / ML Engineering</span>
-        <div class="tags-wrap">
-          <button class="skill-pill" data-skill="RAG">RAG Pipelines</button>
-          <button class="skill-pill" data-skill="Embeddings">Embeddings (nomic-embed-text)</button>
-          <button class="skill-pill" data-skill="Vector DB">Qdrant Vector DB</button>
-          <button class="skill-pill" data-skill="LLM">LLM Integration (Qwen2.5-Coder)</button>
+      <div class="system-art" aria-hidden="true">
+        <div class="art-grid"></div>
+        <div class="scene-parallax">
+          <img class="software-illustration" src="assets/software-workspace.png" alt="" width="1254" height="1254" fetchpriority="high">
         </div>
       </div>
     </section>
+    <div class="section-divider"><span>01 / EXPERIENCE &amp; EXPERTISE</span><span>Building and operating software since 2017.</span></div>
 
     <!-- ====================================================================
          WORK EXPERIENCE (Concise company names & years)
@@ -265,11 +208,16 @@
       <article class="neo-card exp-card exp-card-compact" data-company="Axon Enterprise"
         data-keywords="Golang Java Kafka Flink Elasticsearch Kubernetes Docker GitOps Helm ArgoCD ActiveMQ SQL Vert.x">
         <div class="exp-header" style="border-bottom: none; padding-bottom: 0;">
-          <div class="exp-role-group">
-            <h3 class="exp-role">Software Engineer II</h3>
-            <div class="exp-company">
-              <span>Axon Enterprise</span>
-              <span class="promo-badge">Promoted from SE I</span>
+          <div class="exp-company-identity">
+            <span class="axon-logo-badge" aria-hidden="true">
+              <img src="assets/axon-delta.png" alt="" width="28" height="25" loading="lazy">
+            </span>
+            <div class="exp-role-group">
+              <h3 class="exp-role">Software Engineer II</h3>
+              <div class="exp-company">
+                <span>Axon Enterprise</span>
+                <span class="promo-badge">Promoted from SE I</span>
+              </div>
             </div>
           </div>
           <span class="exp-date-badge">Mar 2021 – 2026 (5 yrs)</span>
@@ -326,6 +274,48 @@
           <span class="mini-tech-tag">Jenkins</span>
         </div>
       </article>
+    </section>
+
+    <!-- Core skills, with personal-project AI experience clearly separated. -->
+    <section class="neo-card skills-card" id="skills" aria-label="Technical Skills">
+      <div class="section-header">
+        <h2 class="section-title">Core Competencies</h2>
+        <span class="mono-tag">Select a skill to highlight related work</span>
+      </div>
+      <div class="skills-category">
+        <h3 class="skills-category-title">Backend &amp; Data Systems</h3>
+        <div class="tags-wrap">
+          <button class="skill-pill" data-skill="Golang">Go</button>
+          <button class="skill-pill" data-skill="Java">Java</button>
+          <button class="skill-pill" data-skill="Kafka">Kafka</button>
+          <button class="skill-pill" data-skill="Flink">Flink</button>
+          <button class="skill-pill" data-skill="SQL">SQL</button>
+          <button class="skill-pill" data-skill="Elasticsearch">Elasticsearch</button>
+        </div>
+      </div>
+      <div class="skills-category">
+        <h3 class="skills-category-title">Cloud &amp; Delivery</h3>
+        <div class="tags-wrap">
+          <button class="skill-pill" data-skill="Kubernetes">Kubernetes</button>
+          <button class="skill-pill" data-skill="Docker">Docker</button>
+          <button class="skill-pill" data-skill="AWS">AWS</button>
+          <button class="skill-pill" data-skill="GitOps">GitOps</button>
+        </div>
+      </div>
+      <div class="skills-category">
+        <h3 class="skills-category-title">Production Operations</h3>
+        <p class="skills-summary">Observability, SLOs, and incident triage.</p>
+        <p class="skills-tools">Grafana · Prometheus · OpenTelemetry</p>
+      </div>
+      <div class="skills-category">
+        <h3 class="skills-category-title">AI · Personal Projects</h3>
+        <div class="tags-wrap">
+          <button class="skill-pill" data-skill="RAG">RAG</button>
+          <button class="skill-pill" data-skill="Embeddings">Embeddings</button>
+          <button class="skill-pill" data-skill="Qdrant">Qdrant</button>
+        </div>
+        <p class="skills-tools">Local LLM integration with Ollama.</p>
+      </div>
     </section>
 
     <!-- ====================================================================
@@ -561,45 +551,21 @@
         <div class="edu-info">
           <span class="mono-tag">ACADEMIC BACKGROUND</span>
           <h3 class="edu-degree">Bachelor of Science in Physics and Engineering</h3>
-          <p class="edu-dept">Department of Electronics Physics Technology and Informatics</p>
           <p class="edu-school">University of Science, Ho Chi Minh City, Vietnam</p>
         </div>
         <span class="exp-date-badge">2011 – 2016</span>
       </div>
 
       <div class="edu-content-grid">
-        <div class="edu-details">
-          <p class="edu-narrative">
-            During my university years, I dedicated extensive hands-on laboratory time to embedded systems, designing
-            custom printed circuit boards, etching physical prototypes, and writing firmware for microcontrollers.
-          </p>
-          <div class="edu-highlights">
-            <div class="edu-highlight-item">
-              <span class="edu-highlight-icon">⚡</span>
-              <div><strong>Custom PCB & Circuit Design:</strong> Schematics capture, track routing, physical board
-                etching, and precision soldering for prototype circuit boards.</div>
-            </div>
-            <div class="edu-highlight-item">
-              <span class="edu-highlight-icon">📟</span>
-              <div><strong>Embedded Systems & Firmware:</strong> Low level C/C++ development for microcontrollers </div>
-            </div>
-          </div>
-          <div class="tech-stack-pills">
-            <span class="mini-tech-tag">Embedded Systems</span>
-            <span class="mini-tech-tag">Circuit Board (PCB)</span>
-            <span class="mini-tech-tag">Microcontrollers (MCU)</span>
-            <span class="mini-tech-tag">C / C++</span>
-            <span class="mini-tech-tag">Firmware & Drivers</span>
-            <span class="mini-tech-tag">Signal Analysis</span>
-          </div>
-        </div>
+        <p class="edu-narrative">Academic foundation in electronics and embedded systems, with hands-on PCB design and C/C++ firmware development.</p>
 
-        <div class="edu-illustration-wrapper">
+        <figure class="edu-illustration-wrapper">
           <div class="edu-circuit-img-box">
             <img src="embedded-circuit-board.jpg" alt="Embedded System & Custom PCB Circuit Board Design Illustration"
-              class="edu-circuit-img" loading="lazy">
+              class="edu-circuit-img" width="112" height="84" loading="lazy">
           </div>
-        </div>
+          <figcaption>University work<br>2011–2016</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -644,8 +610,9 @@
       </div>
     </section>
 
+    </main>
     <footer class="site-footer">
-      <p>© 2026 Vy Dinh • Designed with modern neobrutalism • Ho Chi Minh City, Vietnam</p>
+      <p>© 2026 Vy Dinh • Built with intention • Ho Chi Minh City, Vietnam</p>
     </footer>
 
   </div>
@@ -656,7 +623,7 @@
   <!-- Dynamic Activity Data (Auto-Updated Daily via GitHub Actions) -->
   <script src="data/activity.js?v=20260912"></script>
   <!-- Main JavaScript -->
-  <script src="app.js?v=20260912"></script>
+  <script src="app.js?v=20261004"></script>
 </body>
 
 </html>
