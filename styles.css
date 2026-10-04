@@ -1719,7 +1719,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 .developer-companion { position: absolute; bottom: 3%; left: 6%; z-index: 3; width: 80px;  }
 .companion-button { display: block; width: 80px; height: 160px; padding: 0; border: 0; border-radius: 30%; background: transparent; cursor: pointer; touch-action: manipulation; }
 .companion-waver { display: block; width: 100%; height: 100%; background: url('assets/developer-wave.png') 0 50% / 600% 100% no-repeat; animation: companion-wave 1.6s step-end infinite; filter: drop-shadow(0 5px 4px #00000020); }
-.companion-bubble { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: max-content; max-width: 155px; padding: 8px 12px; background: var(--bg-card); color: var(--text-main); border: var(--border); border-radius: 12px 12px 12px 3px; font-size: 11px; line-height: 1.5; box-shadow: var(--shadow-md); pointer-events: none; }
+/* Keep longer greetings inside the clipped illustration area. */
+.companion-bubble { position: absolute; bottom: 100%; left: 0; width: max-content; max-width: 155px; padding: 8px 12px; background: var(--bg-card); color: var(--text-main); border: var(--border); border-radius: 12px 12px 12px 3px; font-size: 11px; line-height: 1.5; box-shadow: var(--shadow-md); pointer-events: none; }
 .is-paused, .is-paused .companion-waver { animation-play-state: paused; }
 
 @keyframes companion-wave { 0%, 100% { background-position-x: 0%; } 25%, 75% { background-position-x: 20%; } 50% { background-position-x: 40%; } }
@@ -1733,3 +1734,67 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
   .companion-waver { background-image: url('assets/developer-companion.png'); background-size: contain; background-position: center; }
 }
 @media print { .developer-companion { display: none; } }
+
+/* Calm and earthy: ocean teal, dusty blue, warm stone, and olive. */
+:root {
+  --bg-page: #dee1dd;
+  --bg-card: #f7f8f4;
+  --bg-card-alt: #e9eae3;
+  --text-main: #193a3e;
+  --text-muted: #4c6263;
+  --text-dim: #5f6c69;
+  --border-color: #c5ccc5;
+  --accent-yellow: #d8d5c8;
+  --accent-yellow-dark: #ada799;
+  --accent-coral: #4d757b;
+  --accent-pink: #dfddd1;
+  --accent-blue: #d6e1e6;
+  --accent-green: #dce0d2;
+  --accent-orange: #e2d8c8;
+  --accent-purple: #d9e2df;
+  --shadow-sm: 0 2px 4px #193a3e08;
+  --shadow-md: 0 6px 20px #193a3e08;
+  --shadow-lg: 0 18px 45px #193a3e0d;
+  --shadow-hover: 0 14px 32px #193a3e14;
+  --shadow-active: 0 1px 2px #193a3e08;
+}
+[data-theme="dark"] {
+  --bg-page: #23393c;
+  --bg-card: #2d4649;
+  --bg-card-alt: #3a5558;
+  --text-main: #f3f5ef;
+  --text-muted: #dce4df;
+  --text-dim: #c8d4d1;
+  --border-color: #607b7c;
+  --accent-yellow: #5d5337;
+  --accent-yellow-dark: #ada799;
+  --accent-coral: #b6cdd5;
+  --accent-pink: #545647;
+  --accent-blue: #425f6b;
+  --accent-green: #50583e;
+  --accent-orange: #605848;
+  --accent-purple: #465e5e;
+}
+body { background-image: radial-gradient(ellipse at 80% 0%, #ada7991c, transparent 45%); }
+.site-title, .section-title, .project-name, .exp-role, .skills-category-title { color: var(--accent-coral); }
+.verified-badge { background: #4d757b; }
+.hero-headline em { color: #4d757b; }
+[data-theme="dark"] .hero-headline em { color: #ada799; }
+.hero-primary { background: #4d757b; color: #fff; box-shadow: 0 4px 0 #193a3e, 0 8px 16px #4d757b18; }
+[data-theme="dark"] .hero-primary { background: #a2b5c3; color: #193a3e; box-shadow: 0 4px 0 #748f9a, 0 8px 16px #00000020; }
+[data-theme="dark"] .neo-btn.btn-yellow { background: var(--accent-yellow); }
+.system-art { background: radial-gradient(ellipse at 50% 45%, #a2b5c330, transparent 65%); }
+.art-grid { background-image: linear-gradient(#4d757b12 1px, transparent 1px), linear-gradient(90deg, #4d757b12 1px, transparent 1px); }
+.software-illustration { filter: drop-shadow(0 24px 20px #193a3e18); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #4d757b; }
+[data-theme="dark"] .terminal-card { background-color: #263d40; color: var(--text-main); }
+[data-theme="dark"] .terminal-bar { background-color: #344e51; border-color: var(--border-color); }
+[data-theme="dark"] .terminal-input-row { background-color: #2d4649; border-color: var(--border-color); }
+[data-theme="dark"] .terminal-title { color: var(--text-muted); }
+[data-theme="dark"] .term-btn { background-color: #405b5f; color: #dee1dd; border-color: #71898a; }
+[data-theme="dark"] .term-btn:hover { background-color: #dee1dd; color: #193a3e; }
+[data-theme="dark"] .term-input::placeholder { color: var(--text-dim); }
+
+.hero-headline em { color: #5d5337; }
+[data-theme="dark"] .hero-headline em { color: #a2b5c3; }
+[data-theme="dark"] a:focus-visible, [data-theme="dark"] button:focus-visible, [data-theme="dark"] input:focus-visible { outline-color: #a2b5c3; }
