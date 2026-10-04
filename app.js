@@ -645,7 +645,12 @@ function initDeveloperCompanion() {
   if (!companion) return;
   const button = companion.querySelector('button');
   const message = document.getElementById('companionMessage');
-  const greetings = ['Hello, world! 👋', 'One more bug fixed! ✨', 'Coffee → code → repeat ☕', 'Ready to build something?'];
+  const greetings = [
+    "Let's stay in touch! ✨",
+    'dnthuyvy@gmail.com ✉️',
+    'Ready to build something? 🚀',
+    'Nice to meet you! 👋'
+  ];
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let visible = true;
   function updateMotion() {
@@ -661,10 +666,21 @@ function initDeveloperCompanion() {
   }
   updateMotion();
   let clicks = 0;
-  button.addEventListener('click', () => {
-    message.textContent = greetings[clicks % greetings.length];
+  function advanceGreeting() {
+    const text = greetings[clicks % greetings.length];
+    message.textContent = text;
     updateMotion();
+    if (text.includes('dnthuyvy@gmail.com')) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText('dnthuyvy@gmail.com').then(() => {
+          showToast('✓ dnthuyvy@gmail.com copied to clipboard!');
+        }).catch(() => {});
+      }
+    }
     clicks += 1;
-
-  });
+  }
+  button.addEventListener('click', advanceGreeting);
+  if (message) {
+    message.addEventListener('click', advanceGreeting);
+  }
 }

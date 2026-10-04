@@ -1720,14 +1720,14 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 .companion-button { display: block; width: 80px; height: 160px; padding: 0; border: 0; border-radius: 30%; background: transparent; cursor: pointer; touch-action: manipulation; }
 .companion-waver { display: block; width: 100%; height: 100%; background: url('assets/developer-wave.png') 0 50% / 600% 100% no-repeat; animation: companion-wave 1.6s step-end infinite; filter: drop-shadow(0 5px 4px #00000020); }
 /* Keep longer greetings inside the clipped illustration area. */
-.companion-bubble { position: absolute; bottom: 100%; left: 0; width: max-content; max-width: 155px; padding: 8px 12px; background: var(--bg-card); color: var(--text-main); border: var(--border); border-radius: 12px 12px 12px 3px; font-size: 11px; line-height: 1.5; box-shadow: var(--shadow-md); pointer-events: none; }
+.companion-bubble { position: absolute; bottom: 100%; left: 0; width: max-content; max-width: 190px; padding: 8px 12px; background: var(--bg-card); color: var(--text-main); border: var(--border); border-radius: 12px 12px 12px 3px; font-size: 11px; line-height: 1.5; box-shadow: var(--shadow-md); cursor: pointer; user-select: none; }
 .is-paused, .is-paused .companion-waver { animation-play-state: paused; }
 
 @keyframes companion-wave { 0%, 100% { background-position-x: 0%; } 25%, 75% { background-position-x: 20%; } 50% { background-position-x: 40%; } }
 @media (max-width: 600px) {
   .developer-companion { width: 56px; }
   .companion-button { width: 56px; height: 112px; }
-  .companion-bubble { max-width: 110px; font-size: 10px; padding: 6px 8px; }
+  .companion-bubble { max-width: 160px; font-size: 10px; padding: 6px 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .developer-companion { left: 8%; }
@@ -1798,3 +1798,35 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #4d7
 .hero-headline em { color: #5d5337; }
 [data-theme="dark"] .hero-headline em { color: #a2b5c3; }
 [data-theme="dark"] a:focus-visible, [data-theme="dark"] button:focus-visible, [data-theme="dark"] input:focus-visible { outline-color: #a2b5c3; }
+
+/* Standalone circuit illustration: transparent edges and raised components. */
+.edu-circuit-img-box { background: transparent; border: 0; overflow: visible; box-shadow: none; }
+.edu-circuit-img { object-fit: contain; filter: drop-shadow(0 12px 7px #102a3040); transition: transform .3s ease; }
+.edu-circuit-img-box:hover .edu-circuit-img { transform: translateY(-5px) rotate(-2deg); }
+@media (prefers-reduced-motion: reduce) {
+  .edu-circuit-img-box:hover .edu-circuit-img { transform: none; }
+}
+
+/* Sculpted lettering stays selectable and accessible as the page heading. */
+.name-sculpture {
+  display: inline-block;
+  padding: 2px 8px 9px 0;
+  font-size: clamp(30px, 3.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  color: #4d757b;
+  text-shadow: 0 -1px 0 #dce8e4, 1px 1px 0 #3e6268,
+    2px 2px 0 #36585e, 3px 3px 0 #2d4c52, 4px 4px 0 #244248,
+    5px 5px 0 #193a3e, 7px 10px 10px #193a3e30;
+  transform: perspective(500px) rotateY(-10deg) rotateX(5deg);
+  transform-origin: left center;
+}
+[data-theme="dark"] .name-sculpture {
+  color: #dee1dd;
+  text-shadow: 0 -1px 0 #f8faf5, 1px 1px 0 #a2b5c3,
+    2px 2px 0 #8da3ad, 3px 3px 0 #718e96, 4px 4px 0 #577980,
+    5px 5px 0 #4d757b, 7px 10px 12px #102a3066;
+}
+@media print {
+  .name-sculpture { color: #193a3e; text-shadow: none; transform: none; }
+}
