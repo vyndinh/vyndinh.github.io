@@ -1718,7 +1718,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 /* Stationary companion with a six-frame hello wave. */
 .developer-companion { position: absolute; bottom: 3%; left: 6%; z-index: 3; width: 80px;  }
 .companion-button { display: block; width: 80px; height: 160px; padding: 0; border: 0; border-radius: 30%; background: transparent; cursor: pointer; touch-action: manipulation; }
-.companion-waver { display: block; width: 100%; height: 100%; background: url('assets/developer-wave.png') 0 50% / 600% 100% no-repeat; animation: companion-wave 1.6s step-end infinite; filter: drop-shadow(0 5px 4px #00000020); }
+.companion-waver { display: block; width: 100%; height: 100%; background: url('assets/developer-wave-blue.png') 0 50% / 600% 100% no-repeat; animation: companion-wave 1.6s step-end infinite; filter: drop-shadow(0 5px 4px #00000020); }
 /* Keep longer greetings inside the clipped illustration area. */
 .companion-bubble { position: absolute; bottom: 100%; left: 0; width: max-content; max-width: 190px; padding: 8px 12px; background: var(--bg-card); color: var(--text-main); border: var(--border); border-radius: 12px 12px 12px 3px; font-size: 11px; line-height: 1.5; box-shadow: var(--shadow-md); cursor: pointer; user-select: none; }
 .is-paused, .is-paused .companion-waver { animation-play-state: paused; }
@@ -1731,102 +1731,125 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 }
 @media (prefers-reduced-motion: reduce) {
   .developer-companion { left: 8%; }
-  .companion-waver { background-image: url('assets/developer-companion.png'); background-size: contain; background-position: center; }
+  .companion-waver { background-image: url('assets/developer-wave-blue.png'); background-size: 600% 100%; background-position: 0 50%; }
 }
 @media print { .developer-companion { display: none; } }
 
-/* Calm and earthy: ocean teal, dusty blue, warm stone, and olive. */
+/* Carbon, titanium, and ice blue. */
 :root {
-  --bg-page: #dee1dd;
-  --bg-card: #f7f8f4;
-  --bg-card-alt: #e9eae3;
-  --text-main: #193a3e;
-  --text-muted: #4c6263;
-  --text-dim: #5f6c69;
-  --border-color: #c5ccc5;
-  --accent-yellow: #d8d5c8;
-  --accent-yellow-dark: #ada799;
-  --accent-coral: #4d757b;
-  --accent-pink: #dfddd1;
-  --accent-blue: #d6e1e6;
-  --accent-green: #dce0d2;
-  --accent-orange: #e2d8c8;
-  --accent-purple: #d9e2df;
-  --shadow-sm: 0 2px 4px #193a3e08;
-  --shadow-md: 0 6px 20px #193a3e08;
-  --shadow-lg: 0 18px 45px #193a3e0d;
-  --shadow-hover: 0 14px 32px #193a3e14;
-  --shadow-active: 0 1px 2px #193a3e08;
+  --bg-page: #f7fafc;
+  --bg-card: #ffffff;
+  --bg-card-alt: #e9edf3;
+  --text-main: #171a21;
+  --text-muted: #4e596a;
+  --text-dim: #606c7d;
+  --border-color: #ccd3dd;
+  --accent-yellow: #dceaff;
+  --accent-yellow-dark: #91bdf6;
+  --accent-coral: #2563a6;
+  --accent-pink: #e3e8f0;
+  --accent-blue: #dceaff;
+  --accent-green: #e1e8ee;
+  --accent-orange: #e6e9ee;
+  --accent-purple: #e0e7f1;
+  --shadow-sm: 0 2px 4px #171a2108;
+  --shadow-md: 0 6px 20px #171a2108;
+  --shadow-lg: 0 18px 45px #171a210d;
+  --shadow-hover: 0 14px 32px #171a2114;
+  --shadow-active: 0 1px 2px #171a2108;
 }
 [data-theme="dark"] {
-  --bg-page: #23393c;
-  --bg-card: #2d4649;
-  --bg-card-alt: #3a5558;
-  --text-main: #f3f5ef;
-  --text-muted: #dce4df;
-  --text-dim: #c8d4d1;
-  --border-color: #607b7c;
-  --accent-yellow: #5d5337;
-  --accent-yellow-dark: #ada799;
-  --accent-coral: #b6cdd5;
-  --accent-pink: #545647;
-  --accent-blue: #425f6b;
-  --accent-green: #50583e;
-  --accent-orange: #605848;
-  --accent-purple: #465e5e;
+  --bg-page: #1b2028;
+  --bg-card: #252c36;
+  --bg-card-alt: #303946;
+  --text-main: #f7fafc;
+  --text-muted: #d5dde8;
+  --text-dim: #c0cddd;
+  --border-color: #495669;
+  --accent-yellow: #223c5c;
+  --accent-yellow-dark: #91bdf6;
+  --accent-coral: #8ebfff;
+  --accent-pink: #303948;
+  --accent-blue: #263e5c;
+  --accent-green: #303d47;
+  --accent-orange: #3c3e45;
+  --accent-purple: #343d50;
 }
-body { background-image: radial-gradient(ellipse at 80% 0%, #ada7991c, transparent 45%); }
+body { background-image: radial-gradient(ellipse at 80% 0%, #91bdf61c, transparent 45%); }
 .site-title, .section-title, .project-name, .exp-role, .skills-category-title { color: var(--accent-coral); }
-.verified-badge { background: #4d757b; }
-.hero-headline em { color: #4d757b; }
-[data-theme="dark"] .hero-headline em { color: #ada799; }
-.hero-primary { background: #4d757b; color: #fff; box-shadow: 0 4px 0 #193a3e, 0 8px 16px #4d757b18; }
-[data-theme="dark"] .hero-primary { background: #a2b5c3; color: #193a3e; box-shadow: 0 4px 0 #748f9a, 0 8px 16px #00000020; }
+.verified-badge { background: #2563a6; }
+.hero-headline em { color: #2563a6; }
+[data-theme="dark"] .hero-headline em { color: #91bdf6; }
+.hero-primary { background: #2563a6; color: #fff; box-shadow: 0 4px 0 #171a21, 0 8px 16px #2563a618; }
+[data-theme="dark"] .hero-primary { background: #60a5fa; color: #171a21; box-shadow: 0 4px 0 #3269ab, 0 8px 16px #00000020; }
 [data-theme="dark"] .neo-btn.btn-yellow { background: var(--accent-yellow); }
-.system-art { background: radial-gradient(ellipse at 50% 45%, #a2b5c330, transparent 65%); }
-.art-grid { background-image: linear-gradient(#4d757b12 1px, transparent 1px), linear-gradient(90deg, #4d757b12 1px, transparent 1px); }
-.software-illustration { filter: drop-shadow(0 24px 20px #193a3e18); }
-a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #4d757b; }
-[data-theme="dark"] .terminal-card { background-color: #263d40; color: var(--text-main); }
-[data-theme="dark"] .terminal-bar { background-color: #344e51; border-color: var(--border-color); }
-[data-theme="dark"] .terminal-input-row { background-color: #2d4649; border-color: var(--border-color); }
+.system-art { background: radial-gradient(ellipse at 50% 45%, #60a5fa30, transparent 65%); }
+.art-grid { background-image: linear-gradient(#2563a612 1px, transparent 1px), linear-gradient(90deg, #2563a612 1px, transparent 1px); }
+.software-illustration { filter: drop-shadow(0 24px 20px #171a2118); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #2563a6; }
+[data-theme="dark"] .terminal-card { background-color: #202731; color: var(--text-main); }
+[data-theme="dark"] .terminal-bar { background-color: #2c3542; border-color: var(--border-color); }
+[data-theme="dark"] .terminal-input-row { background-color: #252c36; border-color: var(--border-color); }
 [data-theme="dark"] .terminal-title { color: var(--text-muted); }
-[data-theme="dark"] .term-btn { background-color: #405b5f; color: #dee1dd; border-color: #71898a; }
-[data-theme="dark"] .term-btn:hover { background-color: #dee1dd; color: #193a3e; }
+[data-theme="dark"] .term-btn { background-color: #334155; color: #f7fafc; border-color: #50627a; }
+[data-theme="dark"] .term-btn:hover { background-color: #f7fafc; color: #171a21; }
 [data-theme="dark"] .term-input::placeholder { color: var(--text-dim); }
 
-.hero-headline em { color: #5d5337; }
-[data-theme="dark"] .hero-headline em { color: #a2b5c3; }
-[data-theme="dark"] a:focus-visible, [data-theme="dark"] button:focus-visible, [data-theme="dark"] input:focus-visible { outline-color: #a2b5c3; }
+.hero-headline em { color: #223c5c; }
+[data-theme="dark"] .hero-headline em { color: #60a5fa; }
+[data-theme="dark"] a:focus-visible, [data-theme="dark"] button:focus-visible, [data-theme="dark"] input:focus-visible { outline-color: #60a5fa; }
 
 /* Standalone circuit illustration: transparent edges and raised components. */
 .edu-circuit-img-box { background: transparent; border: 0; overflow: visible; box-shadow: none; }
-.edu-circuit-img { object-fit: contain; filter: drop-shadow(0 12px 7px #102a3040); transition: transform .3s ease; }
+.edu-circuit-img { object-fit: contain; filter: drop-shadow(0 12px 7px #07111f40); transition: transform .3s ease; }
 .edu-circuit-img-box:hover .edu-circuit-img { transform: translateY(-5px) rotate(-2deg); }
 @media (prefers-reduced-motion: reduce) {
   .edu-circuit-img-box:hover .edu-circuit-img { transform: none; }
 }
 
-/* Sculpted lettering stays selectable and accessible as the page heading. */
+/* A separate lit face keeps the extrusion crisp without shadowing the letters. */
 .name-sculpture {
+  --name-face: linear-gradient(165deg, #7199c3 0%, #38699d 48%, #224b79 100%);
+  position: relative;
   display: inline-block;
   padding: 2px 8px 9px 0;
   font-size: clamp(30px, 3.5vw, 42px);
   font-weight: 800;
-  letter-spacing: -.045em;
-  color: #4d757b;
-  text-shadow: 0 -1px 0 #dce8e4, 1px 1px 0 #3e6268,
-    2px 2px 0 #36585e, 3px 3px 0 #2d4c52, 4px 4px 0 #244248,
-    5px 5px 0 #193a3e, 7px 10px 10px #193a3e30;
-  transform: perspective(500px) rotateY(-10deg) rotateX(5deg);
-  transform-origin: left center;
+  letter-spacing: -.025em;
+  white-space: nowrap;
+  color: #244a70;
+  text-shadow: .5px .5px 0 #315b83, 1px 1px 0 #2f567c,
+    1.5px 1.5px 0 #2c5275, 2px 2px 0 #294d6e,
+    2.5px 2.5px 0 #264868, 3px 3px 0 #234361,
+    3.5px 3.5px 0 #203e5a, 4px 4px 0 #1d3953,
+    5px 8px 8px #101b2a30;
+}
+.name-sculpture::after {
+  content: attr(data-name);
+  position: absolute;
+  top: 2px;
+  left: 0;
+  color: transparent;
+  background: var(--name-face);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-shadow: none;
+  -webkit-text-stroke: .3px #b8d7f34d;
+  pointer-events: none;
 }
 [data-theme="dark"] .name-sculpture {
-  color: #dee1dd;
-  text-shadow: 0 -1px 0 #f8faf5, 1px 1px 0 #a2b5c3,
-    2px 2px 0 #8da3ad, 3px 3px 0 #718e96, 4px 4px 0 #577980,
-    5px 5px 0 #4d757b, 7px 10px 12px #102a3066;
+  --name-face: linear-gradient(165deg, #ffffff 0%, #d7e9fc 42%, #8ab8ed 100%);
+  color: #6093c8;
+  text-shadow: .5px .5px 0 #608ebc, 1px 1px 0 #5883b0,
+    1.5px 1.5px 0 #5079a3, 2px 2px 0 #486e96,
+    2.5px 2.5px 0 #406489, 3px 3px 0 #38597c,
+    3.5px 3.5px 0 #304f6f, 4px 4px 0 #284462,
+    5px 9px 10px #00000066;
 }
 @media print {
-  .name-sculpture { color: #193a3e; text-shadow: none; transform: none; }
+  .name-sculpture { color: #171a21; text-shadow: none; }
+  .name-sculpture::after { display: none; }
 }
+
+.availability-dot { background: #60a5fa; box-shadow: 0 0 0 4px #60a5fa18; }
+[data-theme="dark"] .hero-primary { background: #60a5fa; color: #0d1013; }
