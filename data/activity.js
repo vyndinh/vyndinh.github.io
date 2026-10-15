@@ -1,7 +1,7 @@
 // Auto-generated activity data for GitHub and LeetCode
 // Updated daily via GitHub Actions (.github/workflows/update-activity.yml)
 window.ACTIVITY_DATA = {
-  "updatedAt": "2026-10-14T04:30:50.642Z",
+  "updatedAt": "2026-10-15T04:12:57.719Z",
   "leetcode": {
     "username": "vyndyn",
     "totalSolved": 237,
@@ -151,7 +151,7 @@ window.ACTIVITY_DATA = {
   },
   "github": {
     "username": "vyndinh",
-    "totalContributions": 2187,
+    "totalContributions": 2228,
     "contributionDays": {
       "2025-10-12": 0,
       "2025-10-13": 0,
@@ -519,8 +519,9 @@ window.ACTIVITY_DATA = {
       "2026-10-10": 25,
       "2026-10-11": 87,
       "2026-10-12": 132,
-      "2026-10-13": 29,
-      "2026-10-14": 12
+      "2026-10-13": 35,
+      "2026-10-14": 23,
+      "2026-10-15": 24
     }
   }
 };
